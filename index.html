@@ -15,12 +15,12 @@
 <body>
     <header>
         <div class="container primary font"> 
-            <h1 class="logo">Ovia</h1>
+            <h1 class="logo accent-split">Ovia</h1>
             <nav class="navbar">
                 <ul>
-                    <li><button class="button primary font" onclick="openForm()">Upload</button></li>
-                    <li><button class="button-alt font">Log in</button></li>
-                    <li><a href=""><img src="imgs/3dots.jpg" alt="kebab" width="40" class="kebab"></a></li>
+                    <li class="in-line"><button class="button primary font" onclick="openUpload()">Upload</button></li>
+                    <li class="in-line"><button class="button-alt accent-split font" onclick="openSignUp()">Log in</button></li>
+                    <li class="in-line"><a href=""><img src="imgs/3dots.jpg" alt="kebab" width="40" class="kebab"></a></li>
                 </ul>
             </nav>
         </div>
@@ -28,14 +28,32 @@
 
     <form class="upload-form font primary" id="uploadForm">
         <div class="upload-container center">
-            <h3>Share your clip</h3>
-            <hr class="solid">
-            <input type="file" id="video-input" accept="video/*" required>
-            <input type="text" placeholder="Add a caption" id="caption-input">
+            <div>
+                <label><span>Upload a clip:</span><input type="file" id="video-input" accept="video/*" required></label>
+            </div>
+            <input type="text" placeholder="" id="caption-input">
             <input class="primary button" type="submit" value="Post">
-            <button class="button-alt primary font" onclick="closeForm()">Cancel</button>
+            <button class="button-alt primary font" type="reset" onclick="closeUpload()">Cancel</button>
         </div>
     </form>
+
+    <form class="signup-form font primary" id="signUpForm" action="js/userdata.js" method="post">
+        <div class="signup-container center">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="signUpFormUsername">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="signUpFormPassword">
+            <div class="signup-buttons">
+                <input class="primary button" type="submit" value="Login">
+                <button class="button-alt primary font" type="reset" onclick="closeSignUp()">Cancel</button>
+            </div>
+            <div class="container register-buttons">
+                <label for="sign-up-button">Don't have an account?</label>
+                <button class="accent2 primary button" name="sign-up-button">Sign Up</button>
+            </div>
+        </div>
+    </form>
+
 
     <hr class="solid">
 
@@ -43,7 +61,6 @@
         <div class="stats-display font primary" id="statsDisplay">
             <div class="stats-container">
                 <h5>Loading...</h5>
-                <hr class="solid">
                 <div id="gameStats1">
                     <h5 class="in-line">Fornite: </h5>
                     <h5 class="in-line" id="fortniteStats">Loading...</h5>
@@ -107,6 +124,7 @@
     <script src="js/gamedata.js"></script>
     <script src="js/populatestats.js"></script>
     <script src="js/upload.js"></script>
+    <script src="js/signup.js"></script>
     <script src="js/playback.js"></script>
 </body>
 </html>

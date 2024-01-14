@@ -54,17 +54,17 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
     post.appendChild(lineBreak);
     document.getElementById("postContainer").prepend(post);
     document.getElementById("uploadForm").reset();
-    closeForm();
+    closeUpload();
 
     //announce updated videos for playback
     updateVideos = new CustomEvent("updateVideos");
     document.dispatchEvent(updateVideos);
 });
 
-function openForm() {
+function openUpload() {
     document.getElementById("uploadForm").style.display = "block";
 }
 
-function closeForm() {
+function closeUpload() {
     document.getElementById("uploadForm").style.display = "none";
 }
