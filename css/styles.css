@@ -90,7 +90,7 @@ hr.solid-alt {
 }
 
 /* Sign Up Form */
-.signup-form {
+.login-form {
     display: none;
     position: sticky fixed;
     z-index: 9;
@@ -103,12 +103,12 @@ hr.solid-alt {
     border-radius: 2rem;
 }
 
-.signup-container {
+.login-container {
     margin-top: -1rem;
     line-height: 2.5;
 }
 
-.signup-container label {
+.login-container label {
     display: block;
 }
 

@@ -1,12 +1,12 @@
-document.getElementById("signUpForm").addEventListener("submit", function(event) {
+document.getElementById("signupForm").addEventListener("submit", function(event) {
     event.preventDefault();
     closeSignUp();
 });
 
-function openSignUp() {
-    document.getElementById("signUpForm").style.display = "block";
+function openSignup() {
+    document.getElementById("signupForm").style.display = "block";
 }
 
-function closeSignUp() {
-    document.getElementById("signUpForm").style.display = "none";
+function closeSignup() {
+    document.getElementById("signupForm").style.display = "none";
 }

@@ -19,7 +19,7 @@
             <nav class="navbar">
                 <ul>
                     <li class="in-line"><button class="button primary font" onclick="openUpload()">Upload</button></li>
-                    <li class="in-line"><button class="button-alt accent-split font" onclick="openSignUp()">Log in</button></li>
+                    <li class="in-line"><button class="button-alt accent-split font" onclick="openLogin()">Log in</button></li>
                     <li class="in-line"><a href=""><img src="imgs/3dots.jpg" alt="kebab" width="40" class="kebab"></a></li>
                 </ul>
             </nav>
@@ -37,19 +37,36 @@
         </div>
     </form>
 
-    <form class="signup-form font primary" id="signUpForm" action="js/userdata.js" method="post">
-        <div class="signup-container center">
+    <form class="login-form font primary" id="loginForm" method="post">
+        <div class="login-container center">
             <label for="username">Username:</label>
-            <input type="text" name="username" id="signUpFormUsername">
+            <input type="text" name="username" id="loginFormUsername">
             <label for="password">Password:</label>
-            <input type="password" name="password" id="signUpFormPassword">
-            <div class="signup-buttons">
+            <input type="password" name="password" id="loginFormPassword">
+            <div class="login-buttons">
                 <input class="primary button" type="submit" value="Login">
-                <button class="button-alt primary font" type="reset" onclick="closeSignUp()">Cancel</button>
+                <button class="button-alt primary font" type="reset" onclick="closeLogin()">Cancel</button>
             </div>
             <div class="container register-buttons">
-                <label for="sign-up-button">Don't have an account?</label>
-                <button class="accent2 primary button" name="sign-up-button">Sign Up</button>
+                <label for="signup-button">Don't have an account?</label>
+                <button class="accent2 primary button" name="signup-button" onclick="closeLogin(); openSignup()">Sign Up</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="login-form font primary" id="signupForm" method="post">
+        <div class="login-container center">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="signupFormUsername">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="signupFormPassword">
+            <div class="login-buttons">
+                <input class="primary button" type="submit" value="Sign Up">
+                <button class="button-alt primary font" type="reset" onclick="closeSignup()">Cancel</button>
+            </div>
+            <div class="container register-buttons">
+                <label for="login-button">Already have an account?</label>
+                <button class="accent2 primary button" name="login-button" onclick="closeSignup(); openLogin()">Login</button>
             </div>
         </div>
     </form>
@@ -124,6 +141,7 @@
     <script src="js/gamedata.js"></script>
     <script src="js/populatestats.js"></script>
     <script src="js/upload.js"></script>
+    <script src="js/login.js"></script>
     <script src="js/signup.js"></script>
     <script src="js/playback.js"></script>
 </body>
