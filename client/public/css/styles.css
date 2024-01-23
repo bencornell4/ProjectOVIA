@@ -133,6 +133,15 @@ hr.solid-alt {
     display: block;
 }
 
+.login-container .error-message {
+    display: none;
+    color: #c80815;
+}
+
+.error-message h6 {
+    margin: 0rem;
+}
+
 .register-buttons{
     justify-content: center;
 }

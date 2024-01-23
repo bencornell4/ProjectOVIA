@@ -19,8 +19,8 @@
             <nav class="navbar">
                 <ul>
                     <li class="in-line"><button class="button primary font" name="upload-open">Upload</button></li>
-                    <li class="in-line"><button class="button-alt accent-split font" name="login-open">Log in</button></li>
-                    <li class="in-line profile-menu"><button><img src="imgs/benprof.jpg" alt="author-pfp" name="populate-stats-hover"></button></li>
+                    <li class="in-line" id="loginButton"><button class="button-alt accent-split font" name="login-open">Log in</button></li>
+                    <li class="in-line profile-menu" id="profileButton"><button><img src="imgs/benprof.jpg" alt="author-pfp" name="populate-stats-hover"></button></li>
                     <!--<li class="in-line"><a href=""><img src="imgs/3dots.jpg" alt="kebab" width="40" class="kebab"></a></li>-->
                 </ul>
             </nav>
@@ -44,6 +44,9 @@
             <input type="text" name="username" id="loginFormUsername">
             <label for="password">Password:</label>
             <input type="password" name="password" id="loginFormPassword">
+            <div class="error-message" id="loginErrorMessage">
+                <h6>Username or password incorrect</h6>
+            </div>
             <div class="login-buttons">
                 <input class="primary button" type="submit" value="Login">
                 <button class="button-alt primary font" type="reset" id="loginCancel">Cancel</button>
