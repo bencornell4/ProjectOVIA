@@ -12,6 +12,8 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         return response.json();
     }).then((body) => {
         if (body) {
+            const currentUser = document.getElementById("loginFormUsername").value;
+            document.getElementById("profileButton").firstChild.firstChild.src = `https://res.cloudinary.com/dllfvjfoy/image/upload/f_auto,q_auto/v1/pfp/${currentUser}`;
             document.getElementById("loginErrorMessage").style.display = "none";
             document.getElementById("loginForm").style.display = "none";
             document.getElementById("loginButton").style.display = "none";

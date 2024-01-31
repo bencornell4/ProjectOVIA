@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const { getClient } = require('./getclient');
+const jwt = require('jsonwebtoken');
 
 const loginUser = async (username, password) => {
     const client = await getClient();
@@ -31,7 +32,9 @@ router.post('/', async(req, res) => {
     const { username, password } = req.body;
     try {
         const isMatch = await loginUser(username, password);
+        //const token = jwt.sign({ userId: username }, 'temporary_key');
         res.json(isMatch);
+        //res.json(token);
     } catch (err) {
         console.error(err.message);
         res.status(err.code).send(err);
