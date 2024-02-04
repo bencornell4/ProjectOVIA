@@ -14,7 +14,7 @@ const loginUser = async (username, password) => {
         )).rows;
         if (matchingUser.length === 0) {
             const error = new Error("User not found");
-            error.code = 400;
+            error.code = 404;
             throw error;
         } else {
             isMatch = await bcrypt.compare(password, matchingUser[0].password);
