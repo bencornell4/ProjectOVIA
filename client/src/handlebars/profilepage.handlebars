@@ -1,52 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{username}}</title>
-    <link type="text/css" rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href=".../public/css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-    <header>
-        <div class="prof-header primary font">
-            <img src={{profPic}} alt="author-pfp" class="profile-crop">
-            <div class="prof-header__container">
-                <div class="container prof-header__top-buttons">
-                    <h3 class="author-name">{{username}}</h3>
-                    <!--add button switch--><button class="button-alt">Follow</button>
-                </div>
-                <div>
-                    <h4 class="author-name">{{userFullName}}</h4>
-                    <div class="description">
-                        <p>{{userBio}}</p>
-                    </div>
-                </div>
-            </div> 
-        </div>
-    </header>
-
-    <main>
-        <div class="prof-feed">
-            <div class="video-grid">
-                <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
-                <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
-                <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
-                <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
-                <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
-                <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
-                <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
-                <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
+<header>
+    <div class="prof-header primary font">
+        <img src={{profPic}} alt="author-pfp" class="profile-crop">
+        <div class="prof-header__container">
+            <div class="container prof-header__top-buttons">
+                <h3 class="author-name">{{username}}</h3>
+                <!--add button switch--><button class="button-alt">Follow</button>
             </div>
-        </div>
-    </main>
+            <div>
+                <h4 class="author-name">{{userFullName}}</h4>
+                <div class="description">
+                    <p>{{userBio}}</p>
+                </div>
+            </div>
+        </div> 
+    </div>
+</header>
 
-    <script src="./bundle.js"></script>
-</body>
-</html>
+<main>
+    <div class="prof-feed">
+        <div class="video-grid">
+            <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
+            <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
+            <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
+            <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
+            <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
+            <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
+            <video class="video-grid__item" loop src="videos/Val1.mp4" width=100%></video>
+            <video class="video-grid__item" loop src="videos/NateClip1.MOV" width=100%></video>
+        </div>
+    </div>
+</main>
+
+<script src="./bundle.js"></script>

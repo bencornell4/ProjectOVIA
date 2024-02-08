@@ -5,20 +5,23 @@ const { getClient } = require('./getclient');
 const getProf = async (username) => {
     const client = await getClient();
     try {
-        const matchingUserId = (await client.query(
-            "SELECT user_id FROM users WHERE username = $1",
-            [username]
-        )).rows;
-        console.log(matchingUserId.length);
-        if (matchingUserId.length === 0) {
+        const query = `
+            SELECT
+                u.user_id,
+                p.*
+            FROM
+                users u
+            JOIN
+                profiles p ON u.user_id = p.user_id
+            WHERE
+                u.username = $1;
+        `;
+        const profileData = (await client.query(query, [username])).rows;
+        if (profileData.length === 0) {
             const error = new Error("User not found");
             error.code = 404;
             throw error;
         } else {
-            const profileData = (await client.query(
-                "SELECT * FROM profiles WHERE user_id = $1",
-                [matchingUserId[0].user_id]
-            ));
             console.log("Get profile result: " + profileData)
             return profileData;
         }

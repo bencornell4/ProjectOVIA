@@ -22,7 +22,7 @@ background-color: black;
 .in-line {display: inline-block;}
 .accent2 {color: #08C8BB;}
 .accent1 {color: #c80815;}
-.accent-split {text-shadow: 0.1rem 0.1rem #08C8BB, -0.1rem -0.1rem #c80815;}
+.accent-split {text-shadow: 0.05rem 0.05rem #08C8BB;}
 
 header {
     margin: 0rem 2rem 0;

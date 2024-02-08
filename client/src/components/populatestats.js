@@ -45,12 +45,14 @@ function reqUser() {
     return "bencornell44";
 }
 
-document.addEventListener('mouseout', (event) => {
-    if (sameEvent) {
-        var gameStats = getStatsElement("fortnite");
-        nameDisplay.textContent = "Loading...";
-        gameStats.textContent = "Loading...";
-        statsDisplay.style.display = "none";
-        sameEvent = false;
-    }
-});
+if (window.location.href === '') {
+    document.addEventListener('mouseout', (event) => {
+        if (sameEvent) {
+            var gameStats = getStatsElement("fortnite");
+            nameDisplay.textContent = "Loading...";
+            gameStats.textContent = "Loading...";
+            statsDisplay.style.display = "none";
+            sameEvent = false;
+        }
+    });
+}
