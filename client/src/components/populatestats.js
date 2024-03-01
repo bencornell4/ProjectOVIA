@@ -1,6 +1,7 @@
 const { fortniteRequests } = require("../utils/gamedata.js");
 var statsDisplay = document.getElementById("statsDisplay");
 var nameDisplay = document.getElementsByClassName("stats-container")[0].firstElementChild;
+let sameEvent = false;
 
 function getHoveredImage(e) {
     return document.elementFromPoint(e.clientX, e.clientY);
@@ -10,7 +11,12 @@ function getStatsElement(gameName) {
     return document.getElementById(`${gameName}Stats`);
 }
 
-let sameEvent = false;
+document.addEventListener('click', (event) => {
+    //disables mouse out when clicking through to profile page
+    if (event.target.name == ("populate-stats-hover-user") || event.target.name == ("populate-stats-hover-feed")) {
+        sameEvent = false;
+    }
+})
 
 document.addEventListener('mouseover', (event) => {
     if (sameEvent) {
@@ -45,14 +51,12 @@ function reqUser() {
     return "bencornell44";
 }
 
-if (window.location.href === '') {
-    document.addEventListener('mouseout', (event) => {
-        if (sameEvent) {
-            var gameStats = getStatsElement("fortnite");
-            nameDisplay.textContent = "Loading...";
-            gameStats.textContent = "Loading...";
-            statsDisplay.style.display = "none";
-            sameEvent = false;
-        }
-    });
-}
+document.addEventListener('mouseout', (event) => {
+    if (sameEvent) {
+        var gameStats = getStatsElement("fortnite");
+        nameDisplay.textContent = "Loading...";
+        gameStats.textContent = "Loading...";
+        statsDisplay.style.display = "none";
+        sameEvent = false;
+    }
+});

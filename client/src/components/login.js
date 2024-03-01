@@ -18,6 +18,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
             document.getElementById("loginForm").style.display = "none";
             document.getElementById("loginButton").style.display = "none";
             document.getElementById("profileButton").style.display = "inline-block";
+            document.getElementById("uploadButton").style.display = "inline-block";
         } else {
             document.getElementById("loginErrorMessage").style.display = "block";
         }

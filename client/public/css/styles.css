@@ -94,6 +94,10 @@ header {
     vertical-align: middle;
 }
 
+.upload_button {
+    display: none;
+}
+
 p {
     line-height: 1.5;
 }

@@ -1,66 +1,34 @@
 const uploadOpen = document.querySelectorAll('button[name="upload-open"]')
 
 document.getElementById("uploadForm").addEventListener("submit", function(event) {
-
     event.preventDefault();
-
-    var videoInput = document.getElementById("video-input").files[0],
-        captionInput = document.getElementById("caption-input").value;
-
-    var post = document.createElement("section");
-    //prof pic
-    var pfpDiv = document.createElement("div");
-    pfpDiv.className = "post";
-    var pfpButton = document.createElement("button");
-    var pfpImg = document.createElement("img");
-    pfpImg.src = "imgs/benprof.jpg";
-    pfpImg.alt = "author-pfp";
-    pfpImg.name = "populate-stats-hover";
-    pfpImg.name = "populate-stats-hover";
-    pfpButton.append(pfpImg);
-    pfpDiv.appendChild(pfpButton);
-    post.appendChild(pfpDiv);
-    //content
-    var contentDiv = document.createElement("div");
-    contentDiv.className = "post content primary font";
-    //author
-    var authorDiv = document.createElement("div");
-    authorDiv.className = "author";
-    var userUsername = document.createElement("h3");
-    userUsername.className = "author-name";
-    userUsername.textContent = "bencornell44";
-    var userName = document.createElement("h4");
-    userName.className = "author-name";
-    userName.textContent = "Ben Cornell";
-    authorDiv.appendChild(userUsername);
-    authorDiv.appendChild(userName);
-    contentDiv.appendChild(authorDiv);
-    //description
-    var descriptionDiv = document.createElement("div");
-    descriptionDiv.className = "description";
-    var descriptionContent = document.createElement("p");
-    descriptionContent.textContent = captionInput;
-    descriptionDiv.appendChild(descriptionContent);
-    contentDiv.appendChild(descriptionDiv);
-    //video
-    var videoElement = document.createElement("video");
-    videoElement.loop = true;
-    videoElement.src = URL.createObjectURL(videoInput);
-    videoElement.width = 400;
-    contentDiv.appendChild(videoElement);
-    
-    post.appendChild(contentDiv);
-
-    var lineBreak = document.createElement("hr");
-    lineBreak.className = "solid";
-    post.appendChild(lineBreak);
-    document.getElementById("postContainer").prepend(post);
-    document.getElementById("uploadForm").reset();
-    document.getElementById("uploadForm").style.display = "none";
-
-    //announce updated videos for playback
-    updateVideos = new CustomEvent("updateVideos");
-    document.dispatchEvent(updateVideos);
+    //get upload data
+    const formData = new FormData();
+    const username = "ben";
+    formData.append('username', username);
+    const captionInput = document.getElementById("caption-input").value;
+    formData.append('videoDescription', captionInput);
+    var videoInput = document.getElementById("video-input").files[0];
+    formData.append('videoFile', videoInput, videoInput.name);
+    //send upload to back end
+    fetch(event.target.action, {
+        method: 'POST',
+        body: formData,
+    }).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response not ok');
+        } else {
+            //announce updated videos for playback
+            updateVideos = new CustomEvent("updateVideos");
+            document.dispatchEvent(updateVideos);
+            //close and reset upload form
+            document.getElementById("uploadForm").style.display = "none";
+            document.getElementById("uploadForm").reset();
+        }
+    }).catch((error) => {
+        console.error('Error uploading video: ', error);
+        //display that user doesn't exist? Don't allow redirect?
+    });
 });
 
 uploadOpen.forEach(element => { element.addEventListener('click', function() {

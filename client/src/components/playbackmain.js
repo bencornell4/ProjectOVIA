@@ -1,7 +1,12 @@
 //get all clips
-function loadVideos() {
+async function loadVideos() {
     let clips = document.querySelectorAll("video");
-    clips.forEach(function(clip) {
+    clips.forEach(async function(clip) {
+        try {
+            await clip.play();
+        } catch (error) {
+            console.error("Error playing video:", error);
+        }
         //if clip is 80% in frame play, else pause
         const observer = new IntersectionObserver(
             entries => {
@@ -26,5 +31,4 @@ function loadVideos() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", loadVideos);
-document.addEventListener("updateVideos", loadVideos);
+document.addEventListener("updateVideosMain", loadVideos);
