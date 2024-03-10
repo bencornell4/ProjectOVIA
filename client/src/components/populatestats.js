@@ -1,3 +1,4 @@
+const { reqUser } = require("../utils/requser.js");
 const { fortniteRequests } = require("../utils/gamedata.js");
 var statsDisplay = document.getElementById("statsDisplay");
 var nameDisplay = document.getElementsByClassName("stats-container")[0].firstElementChild;
@@ -44,11 +45,6 @@ function populateStatsBlock(element, username, rightOffset) {
     var gameStats = getStatsElement("fortnite");
     fortniteRequests(username, gameStats);
     sameEvent = true;
-}
-
-function reqUser() {
-    //temporary for testing
-    return "bencornell44";
 }
 
 document.addEventListener('mouseout', (event) => {

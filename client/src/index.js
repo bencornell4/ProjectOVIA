@@ -14,8 +14,21 @@ const loadfeedmain = require('./components/loadfeedmain.js');
 const loadfeedprofile = require('./components/loadfeedprofile.js');
 
 //utils
+const fetchprofiledata = require('./utils/fetchprofiledata.js');
 const gamedata = require('./utils/gamedata.js');
 const populateprofile = require('./utils/populateprofile.js');
+const requser = require('./utils/requser.js');
 
 //exports
-module.exports = {states, templates, login, playbackmain, playbackprofile, populatestats, signup, upload, profilebutton, loadfeedmain, loadfeedprofile, gamedata, populateprofile};
+module.exports = {
+    //templates
+    templates,
+    //components
+    states, login, 
+    playbackmain, playbackprofile, populatestats, 
+    signup, upload, profilebutton, 
+    loadfeedmain, loadfeedprofile, 
+    //utils
+    fetchprofiledata, gamedata, populateprofile, 
+    requser,
+};

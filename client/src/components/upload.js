@@ -1,10 +1,12 @@
+const { reqUser } = require("../utils/requser.js");
+
 const uploadOpen = document.querySelectorAll('button[name="upload-open"]')
 
 document.getElementById("uploadForm").addEventListener("submit", function(event) {
     event.preventDefault();
     //get upload data
     const formData = new FormData();
-    const username = "ben";
+    const username = reqUser();
     formData.append('username', username);
     const captionInput = document.getElementById("caption-input").value;
     formData.append('videoDescription', captionInput);
@@ -17,13 +19,18 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
     }).then((response) => {
         if (!response.ok) {
             throw new Error('Network response not ok');
-        } else {
+        }
+        return response.json();
+    }).then((body) => {
+        if (body) {
             //announce updated videos for playback
-            updateVideos = new CustomEvent("updateVideos");
-            document.dispatchEvent(updateVideos);
+            updateVideos = new CustomEvent("updateVideosMain");
+            document.dispatchEvent(updateVideosMain);
             //close and reset upload form
             document.getElementById("uploadForm").style.display = "none";
             document.getElementById("uploadForm").reset();
+            //announce feed reload
+            location.reload(); //temp
         }
     }).catch((error) => {
         console.error('Error uploading video: ', error);
