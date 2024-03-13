@@ -27,7 +27,7 @@
         </div>
     </header>
 
-    <form id="uploadForm" action="http://localhost:3000/api/video/upload" method="post" class="upload-form font primary">
+    <form id="uploadForm" action="http://localhost:3000/api/upload/video" method="post" class="upload-form font primary">
         <div class="upload-container center">
             <div>
                 <label><span>Upload a clip:</span><input type="file" id="video-input" accept="video/*" required></label>
@@ -64,6 +64,9 @@
             <input type="text" name="username" id="signupFormUsername">
             <label for="password">Password:</label>
             <input type="password" name="password" id="signupFormPassword">
+            <div class="error-message" id="signupErrorMessage">
+                <h6>Username not available</h6>
+            </div>
             <div class="login-buttons">
                 <input class="primary button" type="submit" value="Sign Up">
                 <button class="button-alt primary font" type="reset" id="signupCancel">Cancel</button>

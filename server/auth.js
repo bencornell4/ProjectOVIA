@@ -21,11 +21,11 @@ const registerUser = async (username, password) => {
         )).rows[0];
         await client.query('COMMIT');
         console.log("new user success: " + newUser + " new profile success: " + newProfile);
-        return newUser;
+        return true;
     } catch (err) {
         await client.query('ROLLBACK');
         console.error(err.message);
-        return "Server error";
+        return false;
     } finally {
         await client.end();
     }
@@ -34,7 +34,6 @@ const registerUser = async (username, password) => {
 const loginUser = async (username, password) => {
     const client = await getClient();
     try {
-        const hashedPassword = await bcrypt.hash(password, 10); 
         const matchingUser = (await client.query(
             "SELECT * FROM users WHERE username = $1",
             [username]
@@ -49,7 +48,8 @@ const loginUser = async (username, password) => {
             return isMatch;
         }
     } catch (err) {
-        return err.message;
+        console.error(err.message);
+        return false;
     } finally {
         await client.end();
     }
@@ -71,9 +71,11 @@ function createUserJWT(res, username) {
 router.post('/register', async(req, res) => {
     const { username, password } = req.body;
     try {
-        const newUser = await registerUser(username, password);
-        token = createUserJWT(res, username);
-        res.json(token);
+        const newUserSuccess = await registerUser(username, password);
+        if (newUserSuccess) {
+            token = createUserJWT(res, username);
+        }
+        res.json(newUserSuccess);
     } catch (err) {
         console.error(err.message);
         res.status(500).send(err);
@@ -86,7 +88,9 @@ router.post('/login', async(req, res) => {
         //log in user
         const isMatch = await loginUser(username, password);
         //create jwt
-        token = createUserJWT(res, username);
+        if (isMatch) {
+            token = createUserJWT(res, username);
+        }
         res.json(isMatch);
     } catch (err) {
         console.error(err.message);

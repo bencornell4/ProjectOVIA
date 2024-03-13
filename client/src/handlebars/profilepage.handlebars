@@ -1,15 +1,24 @@
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
+<script src="profilepage.precompiled.js"></script>
 <header>
     <div class="prof-header primary font">
-        <img src={{profPic}} alt="author-pfp" class="profile-crop">
-        <div class="prof-header__container">
-            <div class="container prof-header__top-buttons">
+        <div class="prof-header--pfp">
+            <img src={{profPic}} id="profPFP" alt="Profile Pic" class="profile-crop">
+            <input type="file" id="pfpUpload" accept="image/*" style="display: none;">
+            <div class="prof-edit">
+                <button><img src="/imgs/editicon.png" alt="Edit Button Icon" class="prof-edit-button"></button>
+            </div>
+        </div>
+        <div class="prof-header--info">
+            <div class="container prof-top-buttons">
                 <h3 class="author-name">{{username}}</h3>
                 <!--add button switch--><button class="button-alt">Follow</button>
             </div>
-            <div>
-                <h4 class="author-name">{{userFullName}}</h4>
-                <div class="description">
-                    <p>{{userBio}}</p>
+            <div class="prof-header--info__user">
+                <h4 class="author-name" contenteditable="false">{{userFullName}}</h4>
+                <p class="description" contenteditable="false">{{userBio}}</p>
+                <div class="prof-edit">
+                    <button><img src="/imgs/editicon.png" alt="Edit Button" class="prof-edit-button"></button>
                 </div>
             </div>
         </div> 

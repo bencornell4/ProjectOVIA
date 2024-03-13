@@ -1,17 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const { getClient } = require('./getclient');
 const cloudinary = require('./cloudinaryclient');
 
-//check if asset exists
-router.get('/:assetSrc', async(req, res) => {
+const getAssetSrc = async(assetKey) => {
     try {
-        const { assetId } = req.params;
-        const exists = await checkAsset(assetSrc);
-        res.json(profData);
+        const assetURL = (await cloudinary.api.resource(assetKey)).url;
+        console.log('Asset retrieved:', assetURL);
+        return assetURL;
+    } catch (err) {
+        console.log('Asset not retrieved:', err.message);
+        return false;
+    }
+    
+}
+
+//check if asset exists
+router.get('/exists/:assetKey', async(req, res) => {
+    try {
+        const { assetKey } = req.params;
+        const assetURL = await getAssetSrc(assetKey);
+        res.json(assetURL);
     } catch (err) {
         console.error(err.message);
-        res.status(err.code).send(err);
+        res.status(500).json({ error: 'Internal Server Error'});
     }
 });
 

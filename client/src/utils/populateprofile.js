@@ -1,5 +1,4 @@
-const Handlebars = require('handlebars');
-const profTemplate = Handlebars.templates['profilepage'];
+const profTemplate = require('../handlebars/profilepage.handlebars');
 
 const { fetchProfileData } = require('./fetchprofiledata.js');
 

@@ -8,7 +8,8 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./auth');
 const confirmUser = require('./confirmuser');
 const getProf = require('./getprofiledata');
-const uploadVideo = require('./uploadvideo');
+const setProf = require('./setprofiledata');
+const upload = require('./upload');
 const getChunkFeed = require('./getchunk');
 const assetsRouter = require('./assets');
 
@@ -25,9 +26,10 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/confirmuser', confirmUser);
 app.use('/api/profiles', getProf);
-app.use('/api/video/upload', uploadVideo);
+app.use('/api/profiles/set', setProf);
+app.use('/api/upload', upload);
 app.use('/api/video/getchunk', getChunkFeed);
-app.use('/api/assets/', assetsRouter);
+app.use('/api/assets', assetsRouter);
 
 app.listen(3000, () => {
     console.log('Server started on port 3000');

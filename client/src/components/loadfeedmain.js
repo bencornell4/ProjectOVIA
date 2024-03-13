@@ -1,5 +1,4 @@
-const Handlebars = require('handlebars');
-const postTemplate = Handlebars.templates['mainfeed__post'];
+const postTemplate = require('../handlebars/mainfeed__post.handlebars');
 
 function loadFeedMain() {
     const formData = new FormData();

@@ -6,8 +6,8 @@ const loginOpen = document.querySelectorAll('button[name="login-open"]')
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
     fetch(event.target.action, {
-        credentials: 'include',
         method: 'POST',
+        credentials: 'include',
         body: new URLSearchParams(new FormData(event.target))
     }).then((response) => {
         if (!response.ok) {

@@ -21,10 +21,9 @@ const getProf = async (username) => {
             const error = new Error("User not found");
             error.code = 404;
             throw error;
-        } else {
-            console.log("Get profile result: " + profileData)
-            return profileData;
         }
+        console.log("Get profile result: " + profileData)
+        return profileData;
     } catch (err) {
         return err.message;
     } finally {
