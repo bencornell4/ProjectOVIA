@@ -1,4 +1,4 @@
-const postTemplate = require('../handlebars/mainfeed__post.handlebars');
+const postTemplate = require('../handlebars/profilepage__post.handlebars');
 
 function loadFeedProfile() {
     const formData = new FormData();
@@ -22,8 +22,8 @@ function loadFeedProfile() {
                 feed = feed + constructPost(body[i].video_id);
             }
             document.getElementById("profPostContainer").innerHTML = feed;
-            updateVideosProfile = new CustomEvent("updateVideosProfile");
-            document.dispatchEvent(updateVideosProfile);
+            const profPageOnloadComplete = new CustomEvent("profPageOnloadComplete");
+            document.dispatchEvent(profPageOnloadComplete);
         } else {
             //can't display profile feed
         }
@@ -32,9 +32,12 @@ function loadFeedProfile() {
     });
 }
 
-document.addEventListener("loadProfileVideos", loadFeedProfile);
+document.addEventListener("profPageOnload", loadFeedProfile);
 
 function constructPost(videoId) {
-    const post = `<video class="video-grid__item" id="${videoId}" loop src="https://res.cloudinary.com/dllfvjfoy/video/upload/${videoId}.mp4" width=100%></video>`;
+    const postData = {
+        videoId: videoId,
+    };
+    var post = postTemplate(postData);
     return post;
 }

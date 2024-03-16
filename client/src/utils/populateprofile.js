@@ -7,9 +7,9 @@ function getProfPage(username) {
         .then((data) => {
             const html = profTemplate(data);
             document.body.innerHTML = html;
-            //load profile videos
-            loadProfileVideos = new CustomEvent("loadProfileVideos");
-            document.dispatchEvent(loadProfileVideos);
+            //profile loaded
+            profPageOnload = new CustomEvent("profPageOnload");
+            document.dispatchEvent(profPageOnload);
         })
         .catch((error) => {
             console.error('Error getting profile data: ', error);

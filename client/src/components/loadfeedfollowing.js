@@ -1,12 +1,16 @@
 const postTemplate = require('../handlebars/mainfeed__post.handlebars');
 const { fetchProfileData } = require('../utils/fetchprofiledata');
+const { reqUser } = require('../utils/requser');
 
-function loadFeedMain() {
+function loadFeedFollowing() {
     const formData = new FormData();
     const chunkSize = 5;
+    const username = reqUser();
+    formData.append('username', username);
     formData.append('chunkSize', chunkSize);
-    fetch('http://localhost:3000/api/video/getchunk/main', {
+    fetch('http://localhost:3000/api/video/getchunk/following', {
         method: 'POST',
+        credentials: 'include',
         body: new URLSearchParams(formData)
     }).then((response) => {
         if (!response.ok) {
@@ -20,7 +24,7 @@ function loadFeedMain() {
                 for (var i = 0; i < body.length; i++) {
                     feed = feed + await constructPost(body[i]);
                 }
-                document.getElementById("postContainer").innerHTML = feed;
+                document.getElementById("postContainerFollowing").innerHTML = feed;
                 updateVideosMain = new CustomEvent("updateVideosMain");
                 document.dispatchEvent(updateVideosMain);
             } catch {
@@ -35,7 +39,7 @@ function loadFeedMain() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", loadFeedMain);
+document.addEventListener("DOMContentLoaded", loadFeedFollowing);
 
 async function constructPost(videoObject) {
     const postData = {

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getClient } = require('./getclient');
+const verifyToken = require('./middleware/verifyjwt');
 
 const setProfData = async (username, type, text) => {
     const client = await getClient();
@@ -31,11 +32,16 @@ const setProfData = async (username, type, text) => {
     }
 }
 
-router.post('/', async(req, res) => {
+router.post('/', verifyToken, async(req, res) => {
     try {
         const { username, type, text } = req.body;
-        const profData = await setProfData(username, type, text);
-        res.json(profData);
+        if (username === req.user.username) {
+            const profData = await setProfData(username, type, text);
+            res.json(profData);
+        } else {
+            console.error('Not authorized: wrong token');
+            res.status(401).send({ message: 'Not authorized: wrong token'})
+        }
     } catch (err) {
         console.error(err.message);
         res.status(err.code).send(err);

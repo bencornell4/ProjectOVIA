@@ -7,7 +7,9 @@ const populatestats = require('./components/populatestats.js');
 const signup = require('./components/signup.js');
 const fetchupload = require('./components/fetchupload.js');
 const profilebutton = require('./components/profilebutton.js');
+const feedbutton = require('./components/feedbutton.js');
 const loadfeedmain = require('./components/loadfeedmain.js');
+const loadfeedfollowing = require('./components/loadfeedfollowing.js');
 const loadfeedprofile = require('./components/loadfeedprofile.js');
 const profileedit = require('./components/profileedit.js');
 
@@ -20,10 +22,11 @@ const requser = require('./utils/requser.js');
 //exports
 module.exports = {
     //components
-    states, login, 
-    playbackmain, playbackprofile, populatestats, 
-    signup, fetchupload, profilebutton, 
-    loadfeedmain, loadfeedprofile, profileedit,
+    states, login, playbackmain, 
+    playbackprofile, populatestats, 
+    signup, fetchupload, profilebutton, feedbutton,
+    loadfeedmain, loadfeedfollowing, loadfeedprofile, 
+    profileedit,
     //utils
     fetchprofiledata, gamedata, populateprofile, 
     requser,

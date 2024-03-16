@@ -64,9 +64,19 @@ header {
     margin: 0.5rem;
 }
 
+.feed-navbar li {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
 .button {
     background: transparent;
     border: none !important;
+    cursor: pointer;
+}
+
+.button:active {
+    color: #a8a8a8;
 }
 
 .button-alt {
@@ -80,6 +90,11 @@ header {
     border-top-width: 0;
     border-bottom-width: 0;
     line-height: 1.5;
+    cursor: pointer;
+}
+
+.button-alt:active {
+    color: #a8a8a8;
 }
 
 .profile-menu {
@@ -88,6 +103,7 @@ header {
 
 .profile-menu button {
     all: unset;
+    cursor: pointer;
 }
 
 .kebab {
@@ -110,22 +126,58 @@ hr.solid-alt {
     border: 1px solid black;
 }
 
-/* Sign Up Form */
-.login-form {
+/* overlay and spinner */
+.overlay {
+    position: fixed;
     display: none;
-    position: sticky fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#spinner-overlay {
+    z-index: 19;
+}
+
+#spinner {
+    display: block;
+    margin: auto;
+    z-index: 20;
+    border: 2rem solid #f3f3f3; /* Light gray border */
+    border-top: 2rem solid #08C8BB; /* Blue border on top */
+    border-radius: 50%; /* Make it round */
+    width: 10rem; /* Set the width and height */
+    height: 10rem;
+    animation: spin 2s linear infinite; /* Rotate animation */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); } /* Start position */
+    100% { transform: rotate(360deg); } /* End position (full circle) */
+}
+
+/* Sign Up Form */
+
+
+.login-form {
+    position: fixed;
     z-index: 9;
     background-color: black;
     min-width: 40rem;
     width: 25%;
     min-height: 15rem;
     margin: auto;
-    top: 10%;
     border-radius: 2rem;
 }
 
 .login-container {
-    margin-top: -1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     line-height: 2.5;
 }
 
@@ -148,20 +200,18 @@ hr.solid-alt {
 
 /* Upload Form */
 .upload-form {
-    display: none;
-    position: sticky fixed;
+    position: fixed;
     z-index: 9;
     background-color: black;
     min-width: 40rem;
     width: 25%;
     margin: auto;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
     border-radius: 2rem;
 }
 
 .upload-container {
-    margin-top: -1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     line-height: 2.5;
 }
 
@@ -254,6 +304,10 @@ main {
     margin-bottom: 4rem;
 }
 
+#feedError {
+    padding: 5rem;
+}
+
 /* PROFILE TEMPLATE */
 
 .prof-header {
@@ -315,10 +369,25 @@ main {
     margin-top: 5rem;
 }
 
+.prof-feed--video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .video-grid {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 1rem 1rem;
     padding: 2rem;
+}
+
+.video-grid__item {
+    display: flex;
+}
+
+.video-grid .prof-edit button {
+    top: 0.5rem;
+    right: 0.5rem;
 }
 

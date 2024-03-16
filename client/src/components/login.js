@@ -2,6 +2,7 @@ const { fetchProfileData } = require('../utils/fetchprofiledata.js');
 const { reqUser } = require("../utils/requser.js");
 
 const loginOpen = document.querySelectorAll('button[name="login-open"]')
+const overlay = document.getElementById('login-overlay');
 
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -23,10 +24,10 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
                 });
             //update ui elements
             document.getElementById("loginErrorMessage").style.display = "none";
-            document.getElementById("loginForm").style.display = "none";
             document.getElementById("loginButton").style.display = "none";
             document.getElementById("profileButton").style.display = "inline-block";
             document.getElementById("uploadButton").style.display = "inline-block";
+            overlay.style.display = 'none';
         } else {
             document.getElementById("loginErrorMessage").style.display = "block";
         }
@@ -35,13 +36,15 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     });
 });
 
-loginOpen.forEach(element => { element.addEventListener('click', function() {
-    document.getElementById("loginForm").style.display = "block";
-    document.getElementById("signupForm").style.display = "none";
+loginOpen.forEach(element => { 
+    element.addEventListener('click', function() {
+        overlay.style.display = "flex";
+        document.getElementById("signup-overlay").style.display = "none";
+        document.getElementById("signupErrorMessage").style.display = "none";
     });
 });
 
 document.getElementById("loginCancel").addEventListener('click', function() {
-    document.getElementById("loginForm").style.display = "none";
+    overlay.style.display = 'none';
     document.getElementById("loginErrorMessage").style.display = "none";
 });

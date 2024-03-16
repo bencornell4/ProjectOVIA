@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getClient } = require('./getclient');
 const cloudinary = require('./cloudinaryclient');
+const verifyToken = require('./middleware/verifyjwt');
 
 const uploadVideo = async (username, videoDescription, videoFile) => {
     const client = await getClient();
@@ -20,10 +21,10 @@ const uploadVideo = async (username, videoDescription, videoFile) => {
             "INSERT INTO videos (description, user_id) VALUES ($1, $2) RETURNING *",
             [videoDescription, userId]
         );
-        const videoSrc = await uploadCloudinary(videoFile, newVideo.rows[0].video_id, 'video');
+        const videoSrc = await uploadCloudinary(videoFile, 'videos/' + newVideo.rows[0].video_id, 'video');
         console.log("Video upload success: " + newVideo.rows[0].video_id);
         await client.query('COMMIT');
-        return videoSrc.url;
+        return videoSrc;
     } catch (err) {
         console.error(err.message);
         return false;
@@ -33,20 +34,24 @@ const uploadVideo = async (username, videoDescription, videoFile) => {
 }
 
 const uploadCloudinary = async (assetFile, assetKey, assetType)  => {
-    return new Promise ((resolve) => {
-        cloudinary.uploader.upload_stream({ resource_type: assetType, public_id: assetKey, }, (error, result) => {
-            if (result) {
-                console.log('(Cloudinary) Upload success');
-                resolve(result.url);
-            } else {
-                console.error('(Cloudinary) Error uploading: ', error.message);
-                resolve(false);
-            }
-        }).end(assetFile.data);
-    });
+    try {
+        return new Promise ((resolve, reject) => {
+            cloudinary.uploader.upload_stream({ resource_type: assetType, public_id: assetKey, }, (error, result) => {
+                if (result) {
+                    console.log('(Cloudinary) Upload success');
+                    resolve(result.url);
+                } else {
+                    reject(error);
+                }
+            }).end(assetFile.data);
+        });
+    } catch (err) {
+        console.error('(Cloudinary) Error uploading: ', err.message);
+        throw err;
+    }
 }
 
-router.post('/video', async(req, res) => {
+router.post('/video', verifyToken, async(req, res) => {
     const { username, videoDescription } = req.body;
     const videoFile = req.files.videoFile;
     try {
@@ -58,12 +63,17 @@ router.post('/video', async(req, res) => {
     }
 });
 
-router.post('/pfp', async(req, res) => {
-    const { pfpKey } = req.body;
+router.post('/pfp', verifyToken, async(req, res) => {
+    const { pfpKey, username } = req.body;
     const pfpFile = req.files.imageFile;
     try {
-        const pfpSrc = await uploadCloudinary(pfpFile, 'pfp/' + pfpKey, 'image');
-        res.json(pfpSrc);
+        if (username === req.user.username) {
+            const pfpSrc = await uploadCloudinary(pfpFile, 'pfp/' + pfpKey, 'image');
+            res.json(pfpSrc);
+        } else {
+            console.error('Not authorized: wrong token');
+            res.status(401).send({ message: 'Not authorized: wrong token'})
+        }
     } catch (err) {
         console.error(err.message);
         res.status(500).send(err);

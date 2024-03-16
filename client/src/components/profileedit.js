@@ -1,6 +1,17 @@
-const { reqUser } = require("../utils/requser.js");
 const { fetchProfileKey } = require("../utils/fetchprofiledata.js");
+const { reqUser } = require("../utils/requser.js");
 
+//when page is fully loaded, load edit buttons if user is logged in
+document.addEventListener('profPageOnloadComplete', (event) => {
+    const elements = Array.from(document.getElementsByClassName('prof-edit-button'));
+    if(reqUser() === document.getElementById('profPageUsername').textContent) {
+        elements.forEach((element) => {
+            element.style.display = "block";
+        })
+    }
+})
+
+//check for button clicks to edit buttons
 document.addEventListener('click', (event) => {
     if (event.target.classList.contains('prof-edit-button')) {
         //get editable elements in an array
@@ -30,31 +41,40 @@ function makeEditable(element) {
     }
 }
 
+//submit edits
 function editSubmit(elements, index, event) {
-     if (event.key === 'Enter' || event.type === 'blur') {
+     if ((event.key === 'Enter' || event.type === 'blur')) {
         if (event.target.getAttribute('contenteditable') === 'true') {
             event.preventDefault();
             event.target.setAttribute('contenteditable', 'false');
             //edit behavior
-            var type = 'bio';
-            if (index == 0) {
-                type = 'full_name';
+            if (elements[index].tagName === 'VIDEO' && event.type != 'blur') {
+                //video behavior
+                getVideo(elements[index]);
+            } else if (elements[index].tagName != 'VIDEO') {
+                console.log("test", elements[index]);
+                //text behavior
+                var type = 'bio';
+                if (index == 0) {
+                    type = 'full_name';
+                }
+                updateText(type, event.target.textContent);
+                //next element
+                elements[(index+1) % elements.length].focus();
             }
-            updateText(type, event.target.textContent);
-            //next element
-            elements[(index+1) % elements.length].focus();
         }
     }
 }
 
 function updateText(type, text) {
     const formData = new FormData();
-    username = reqUser();
+    const username = document.getElementById('profPageUsername').textContent;
     formData.append('username', username);
     formData.append('type', type);
     formData.append('text', text);
     fetch('http://localhost:3000/api/profiles/set', {
         method: 'POST',
+        credentials: 'include',
         body: formData,
     }).then((response) => {
         if (!response.ok) {
@@ -68,8 +88,34 @@ function updateText(type, text) {
             //text too long, characters not welcome, etc
         }
     }).catch((error) => {
-        console.error('Error uploading video: ', error);
+        console.error('Error uploading prof data: ', error);
         //display that user doesn't exist? Don't allow redirect?
+    });
+}
+
+function getVideo(element) {
+    const formData = new FormData();
+    const assetKey = element.id;
+    formData.append('assetKey', assetKey);
+    formData.append('assetType', 'video');
+    fetch('http://localhost:3000/api/assets/delete', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData,
+    }).then(response => {
+        if(!response) {
+            throw new Error("Network response not ok");
+        }
+        return response.json();
+    }).then(body => {
+        if (body) {
+            //announce feed reload
+            location.reload(); //temp
+        } else {
+            //failed to delete video
+        }
+    }).catch(err => {
+        console.log("Error deleting video:", err);
     });
 }
 
@@ -90,12 +136,15 @@ function pfpUploadListener(event) {
 async function updatePFP(imgInput) {
     //get upload data
     const formData = new FormData();
-    pfpKey = await fetchProfileKey(reqUser());
+    const username = document.getElementById('profPageUsername').textContent;
+    pfpKey = await fetchProfileKey(username);
+    formData.append('username', username);
     formData.append('pfpKey', pfpKey);
     formData.append('imageFile', imgInput, imgInput.name);
     //send upload to back end
     fetch('http://localhost:3000/api/upload/pfp', {
         method: 'POST',
+        credentials: 'include',
         body: formData,
     }).then((response) => {
         if (!response.ok) {
@@ -110,7 +159,7 @@ async function updatePFP(imgInput) {
             //picture too large or bad extension
         }
     }).catch((error) => {
-        console.error('Error uploading video: ', error);
+        console.error('Error uploading pfp: ', error);
         //display that user doesn't exist? Don't allow redirect?
     });
 }

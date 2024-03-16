@@ -28,4 +28,4 @@ async function loadOnHover() {
     });
 }
 
-document.addEventListener("updateVideosProfile", loadOnHover);
+document.addEventListener("profPageOnloadComplete", loadOnHover);

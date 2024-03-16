@@ -6,19 +6,19 @@
             <img src={{profPic}} id="profPFP" alt="Profile Pic" class="profile-crop">
             <input type="file" id="pfpUpload" accept="image/*" style="display: none;">
             <div class="prof-edit">
-                <button><img src="/imgs/editicon.png" alt="Edit Button Icon" class="prof-edit-button"></button>
+                <button><img src="/imgs/editicon.png" alt="Edit Button Icon" class="prof-edit-button" style="display: none"></button>
             </div>
         </div>
         <div class="prof-header--info">
             <div class="container prof-top-buttons">
-                <h3 class="author-name">{{username}}</h3>
+                <h3 id="profPageUsername" class="author-name">{{username}}</h3>
                 <!--add button switch--><button class="button-alt">Follow</button>
             </div>
             <div class="prof-header--info__user">
                 <h4 class="author-name" contenteditable="false">{{userFullName}}</h4>
                 <p class="description" contenteditable="false">{{userBio}}</p>
                 <div class="prof-edit">
-                    <button><img src="/imgs/editicon.png" alt="Edit Button" class="prof-edit-button"></button>
+                    <button><img src="/imgs/editicon.png" alt="Edit Button" class="prof-edit-button" style="display: none"></button>
                 </div>
             </div>
         </div> 

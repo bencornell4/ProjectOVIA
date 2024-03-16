@@ -18,65 +18,85 @@
             <h1 class="logo accent-split">Ovia</h1>
             <nav class="navbar">
                 <ul>
-                    <li class="in-line"><button class="upload_button button primary font" id="uploadButton" name="upload-open">Upload</button></li>
-                    <li class="in-line" id="loginButton"><button class="button-alt font" name="login-open">Login</button></li>
+                    <li class="in-line"><button class="upload_button button primary" id="uploadButton" name="upload-open">Upload</button></li>
+                    <li class="in-line" id="loginButton"><button class="button-alt" name="login-open">Login</button></li>
                     <li class="in-line profile-menu" id="profileButton"><button><img src="https://res.cloudinary.com/dllfvjfoy/image/upload/f_auto,q_auto/v1/pfp/default" alt="author-pfp" class="profile-crop" name="populate-stats-hover-user"></button></li>
                     <!--<li class="in-line"><a href=""><img src="imgs/3dots.jpg" alt="kebab" width="40" class="kebab"></a></li>-->
                 </ul>
             </nav>
         </div>
+        <hr class="solid">
+        <div class="center primary font">
+            <nav class="feed-navbar">
+                <ul>
+                    <li class="in-line"><button id="allFeedButton" class="all-button button primary :active" name="All Button">All</button></li>
+                    <li class="in-line"><button id="followFeedButton" class="following-button button primary" name="Following Button">Following</button></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <form id="uploadForm" action="http://localhost:3000/api/upload/video" method="post" class="upload-form font primary">
-        <div class="upload-container center">
-            <div>
-                <label><span>Upload a clip:</span><input type="file" id="video-input" accept="video/*" required></label>
-            </div>
-            <input type="text" placeholder="" id="caption-input">
-            <input class="primary button" type="submit" value="Post">
-            <button class="button-alt primary font" type="reset" id="uploadCancel">Cancel</button>
-        </div>
-    </form>
+    
+    <div id="spinner-overlay" class="overlay">
+        <div id="spinner"></div>
+    </div>
 
-    <form id="loginForm" action="http://localhost:3000/api/auth/login" method="post" class="login-form font primary">
-        <div class="login-container center">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="loginFormUsername">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="loginFormPassword">
-            <div class="error-message" id="loginErrorMessage">
-                <h6>Username or password incorrect</h6>
+    <div id="upload-overlay" class="overlay">
+        <form id="uploadForm" action="http://localhost:3000/api/upload/video" method="post" class="upload-form font primary">
+            <div class="upload-container center">
+                <div>
+                    <label><span>Upload a clip:</span><input type="file" id="video-input" accept="video/*" required></label>
+                </div>
+                <input type="text" placeholder="" id="caption-input">
+                <input class="primary button" type="submit" value="Post">
+                <button class="button-alt primary font" type="reset" id="uploadCancel">Cancel</button>
             </div>
-            <div class="login-buttons">
-                <input class="primary button" type="submit" value="Login">
-                <button class="button-alt primary font" type="reset" id="loginCancel">Cancel</button>
-            </div>
-            <div class="container register-buttons">
-                <label for="signup-button">Don't have an account?</label>
-                <button class="accent2 primary button" name="signup-open" type="reset">Sign Up</button>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
-    <form class="login-form font primary" id="signupForm" action="http://localhost:3000/api/auth/register" method="POST">
-        <div class="login-container center">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="signupFormUsername">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="signupFormPassword">
-            <div class="error-message" id="signupErrorMessage">
-                <h6>Username not available</h6>
+    <div id="login-overlay" class="overlay">
+        <form id="loginForm" action="http://localhost:3000/api/auth/login" method="post" class="login-form font primary">
+            <div class="login-container center">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="loginFormUsername">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="loginFormPassword">
+                <div class="error-message" id="loginErrorMessage">
+                    <h6>Username or password incorrect</h6>
+                </div>
+                <div class="login-buttons">
+                    <input class="primary button" type="submit" value="Login">
+                    <button class="button-alt primary font" type="reset" id="loginCancel">Cancel</button>
+                </div>
+                <div class="container register-buttons">
+                    <label for="signup-button">Don't have an account?</label>
+                    <button class="accent2 primary button" name="signup-open" type="reset">Sign Up</button>
+                </div>
             </div>
-            <div class="login-buttons">
-                <input class="primary button" type="submit" value="Sign Up">
-                <button class="button-alt primary font" type="reset" id="signupCancel">Cancel</button>
+        </form>
+    </div>
+
+    <div id="signup-overlay" class="overlay">
+        <form class="login-form font primary" id="signupForm" action="http://localhost:3000/api/auth/register" method="POST">
+            <div class="login-container center">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="signupFormUsername">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="signupFormPassword">
+                <div class="error-message" id="signupErrorMessage">
+                    <h6>Username not available</h6>
+                </div>
+                <div class="login-buttons">
+                    <input class="primary button" type="submit" value="Sign Up">
+                    <button class="button-alt primary font" type="reset" id="signupCancel">Cancel</button>
+                </div>
+                <div class="container register-buttons">
+                    <label for="login-button">Already have an account?</label>
+                    <button class="accent2 primary button" name="login-open" type="reset">Login</button>
+                </div>
             </div>
-            <div class="container register-buttons">
-                <label for="login-button">Already have an account?</label>
-                <button class="accent2 primary button" name="login-open" type="reset">Login</button>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
 
     <hr class="solid">
@@ -92,6 +112,14 @@
             </div>
         </div>
         <div id="postContainer">
+            <div id="feedError" class="center primary font">
+                <h4>There's nothing here :(</h4>
+            </div>
+        </div>
+        <div id="postContainerFollowing" style="display: none">
+            <div id="feedError" class="center primary font">
+                <h4>There's nothing here :(</h4>
+            </div>
         </div>
     </main>
 

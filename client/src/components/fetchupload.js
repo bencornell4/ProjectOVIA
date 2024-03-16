@@ -1,9 +1,14 @@
 const { reqUser } = require("../utils/requser.js");
 
 const uploadOpen = document.querySelectorAll('button[name="upload-open"]')
+const overlay = document.getElementById('upload-overlay');
 
 document.getElementById("uploadForm").addEventListener("submit", function(event) {
     event.preventDefault();
+    //get spinner
+    const spinnerOverlay = document.getElementById('spinner-overlay');
+    spinnerOverlay.style.display = 'flex';
+    overlay.style.display = "none";
     //get upload data
     const formData = new FormData();
     const username = reqUser();
@@ -15,8 +20,11 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
     //send upload to back end
     fetch(event.target.action, {
         method: 'POST',
+        credentials: 'include',
         body: formData,
     }).then((response) => {
+        //hide spinner
+        spinnerOverlay.display = 'none';
         if (!response.ok) {
             throw new Error('Network response not ok');
         }
@@ -38,11 +46,14 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
     });
 });
 
-uploadOpen.forEach(element => { element.addEventListener('click', function() {
-    document.getElementById("uploadForm").style.display = "block";
+uploadOpen.forEach(element => { 
+    element.addEventListener('click', function() {
+        document.getElementById("uploadForm").style.display = "block";
+        overlay.style.display = "flex";
     });
 });
 
 document.getElementById("uploadCancel").addEventListener('click', function() {
     document.getElementById("uploadForm").style.display = "none";
+    overlay.style.display = "none";
 });

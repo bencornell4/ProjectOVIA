@@ -2,6 +2,7 @@ const { fetchProfileData } = require('../utils/fetchprofiledata.js');
 const { reqUser } = require("../utils/requser.js");
 
 const signupOpen = document.querySelectorAll('button[name="signup-open"]')
+const overlay = document.getElementById('signup-overlay');
 
 document.getElementById("signupForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -23,10 +24,10 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
                 });
             //update ui elements
             document.getElementById("signupErrorMessage").style.display = "none";
-            document.getElementById("signupForm").style.display = "none";
             document.getElementById("loginButton").style.display = "none";
             document.getElementById("profileButton").style.display = "inline-block";
             document.getElementById("uploadButton").style.display = "inline-block";
+            overlay.style.display = 'none';
         } else {
             document.getElementById("signupErrorMessage").style.display = "block";
         }
@@ -35,13 +36,15 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
     });
 });
 
-signupOpen.forEach(element => { element.addEventListener('click', function() {
-    document.getElementById("signupForm").style.display = "block";
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("loginErrorMessage").style.display = "none";
+signupOpen.forEach(element => { 
+    element.addEventListener('click', function() {
+        overlay.style.display = 'flex';
+        document.getElementById("login-overlay").style.display = "none";
+        document.getElementById("loginErrorMessage").style.display = "none";
     });
 });
 
 document.getElementById("signupCancel").addEventListener('click', function() {
-    document.getElementById("signupForm").style.display = "none";
+    overlay.style.display = 'none';
+    document.getElementById("signupErrorMessage").style.display = "none";
 });
