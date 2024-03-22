@@ -28,7 +28,7 @@ const getChunk__main = async (chunkSize) => {
         console.log("Chunks gathered: " + chunk.length);
         return chunk;
     } catch (err) {
-        console.error(err.message);
+        console.error("Error getting chunks main:", err.message);
         return false;
     } finally {
         await client.end();
@@ -58,16 +58,16 @@ const getChunk__following = async (chunkSize, username) => {
             JOIN
                 follows f ON v.user_id = f.followee_id
             WHERE
-                f.follower_id = SELECT (user_id FROM ActiveUser)
+                f.follower_id = (SELECT user_id FROM ActiveUser)
             ORDER BY
                 v.upload_date DESC
             LIMIT $2
         `;
-        const chunk = (await client.query(query, [chunkSize, username])).rows;
+        const chunk = (await client.query(query, [username, chunkSize])).rows;
         console.log("Chunks gathered: " + chunk.length);
         return chunk;
     } catch (err) {
-        console.error(err.message);
+        console.error("Error getting chunks following:", err.message);
         return false;
     } finally {
         await client.end();
@@ -101,7 +101,7 @@ const getChunk__profile = async (chunkSize, username) => {
         console.log("Chunks gathered: " + chunk.length);
         return chunk;
     } catch (err) {
-        console.error(err.message);
+        console.error("Error getting chunks profile:", err.message);
         return false;
     } finally {
         await client.end();

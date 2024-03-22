@@ -52,7 +52,6 @@ function editSubmit(elements, index, event) {
                 //video behavior
                 getVideo(elements[index]);
             } else if (elements[index].tagName != 'VIDEO') {
-                console.log("test", elements[index]);
                 //text behavior
                 var type = 'bio';
                 if (index == 0) {
@@ -88,7 +87,7 @@ function updateText(type, text) {
             //text too long, characters not welcome, etc
         }
     }).catch((error) => {
-        console.error('Error uploading prof data: ', error);
+        location.reload();
         //display that user doesn't exist? Don't allow redirect?
     });
 }
@@ -115,7 +114,7 @@ function getVideo(element) {
             //failed to delete video
         }
     }).catch(err => {
-        console.log("Error deleting video:", err);
+        location.reload();
     });
 }
 
@@ -159,7 +158,7 @@ async function updatePFP(imgInput) {
             //picture too large or bad extension
         }
     }).catch((error) => {
-        console.error('Error uploading pfp: ', error);
+        location.reload();
         //display that user doesn't exist? Don't allow redirect?
     });
 }

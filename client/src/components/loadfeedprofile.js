@@ -15,16 +15,22 @@ function loadFeedProfile() {
         }
         return response.json();
     }).then((body) => {
-        if (body) {
+        contentLoadedProfile = new CustomEvent("contentLoadedProfile");
+        document.dispatchEvent(contentLoadedProfile);
+        if (body.length > 0) {
             var feed = "";
             for (var i = 0; i < body.length; i++)
             {
                 feed = feed + constructPost(body[i].video_id);
             }
             document.getElementById("profPostContainer").innerHTML = feed;
+            //page is sufficiently loaded
             const profPageOnloadComplete = new CustomEvent("profPageOnloadComplete");
             document.dispatchEvent(profPageOnloadComplete);
         } else {
+            //page is sufficiently loaded
+            const profPageOnloadComplete = new CustomEvent("profPageOnloadComplete");
+            document.dispatchEvent(profPageOnloadComplete);
             //can't display profile feed
         }
     }).catch((error) => {

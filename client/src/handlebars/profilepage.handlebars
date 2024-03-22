@@ -10,9 +10,9 @@
             </div>
         </div>
         <div class="prof-header--info">
-            <div class="container prof-top-buttons">
+            <div class="prof-top-buttons">
                 <h3 id="profPageUsername" class="author-name">{{username}}</h3>
-                <!--add button switch--><button class="button-alt">Follow</button>
+                <button class="button-alt">Follow</button>
             </div>
             <div class="prof-header--info__user">
                 <h4 class="author-name" contenteditable="false">{{userFullName}}</h4>
@@ -23,11 +23,42 @@
             </div>
         </div> 
     </div>
+    <!--
+        <div class="primary font prof-header--stats">
+            <div class="prof-stats-container">
+            </div>
+            <button class="prof-edit-button button-alt"><h4>+</h4></button>
+        </div>
+        <div id="upload-overlay" class="">
+            <form id="setStatsForm" action="" method="post" class="font primary">
+                <div class="upload-container center">
+                    
+                        <div>
+                            <label><span>Game:</span>
+                                <select id="statsGames" class="font">
+                                    <option value="">Test1</option>
+                                    <option value="">Test2</option>
+                                    <option value="">Test3</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div>
+                            <label><span>Username: </span><input type="text" placeholder="" id="caption-input"></label>
+                        </div>
+                        <input class="primary button" type="submit" value="Apply">
+                        <button class="button-alt primary font" type="reset" id="uploadCancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    -->
 </header>
 
 <main>
     <div class="prof-feed">
         <div class="video-grid" id="profPostContainer">
+            <div id="feedError" class="center primary font">
+                <h4>There's nothing here :(</h4>
+            </div>
         </div>
     </div>
 </main>

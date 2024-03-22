@@ -15,7 +15,7 @@ const profileedit = require('./components/profileedit.js');
 
 //utils
 const fetchprofiledata = require('./utils/fetchprofiledata.js');
-const gamedata = require('./utils/gamedata.js');
+const fetchgamedata = require('./utils/fetchgamedata.js');
 const populateprofile = require('./utils/populateprofile.js');
 const requser = require('./utils/requser.js');
 
@@ -28,6 +28,6 @@ module.exports = {
     loadfeedmain, loadfeedfollowing, loadfeedprofile, 
     profileedit,
     //utils
-    fetchprofiledata, gamedata, populateprofile, 
+    fetchprofiledata, fetchgamedata, populateprofile, 
     requser,
 };

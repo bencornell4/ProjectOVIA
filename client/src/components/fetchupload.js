@@ -32,7 +32,7 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
     }).then((body) => {
         if (body) {
             //announce updated videos for playback
-            updateVideos = new CustomEvent("updateVideosMain");
+            updateVideosMain = new CustomEvent("updateVideosMain");
             document.dispatchEvent(updateVideosMain);
             //close and reset upload form
             document.getElementById("uploadForm").style.display = "none";
@@ -41,8 +41,8 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
             location.reload(); //temp
         }
     }).catch((error) => {
-        console.error('Error uploading video: ', error);
         //display that user doesn't exist? Don't allow redirect?
+        location.reload();
     });
 });
 

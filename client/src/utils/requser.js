@@ -4,8 +4,10 @@ function reqUser() {
     const cookies = document.cookie.split('; ');
     const userCookie = cookies.find(row => row.startsWith('user-auth-token'));
     const token = userCookie ? userCookie.split('=')[1] : null;
-    const decodeToken = jwtDecode(token);
-    return decodeToken.username;
+    if (token) {
+        return jwtDecode(token).username;
+    }
+    return false;
 }
 
 module.exports = { reqUser };

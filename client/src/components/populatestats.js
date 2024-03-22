@@ -1,5 +1,5 @@
 const { reqUser } = require("../utils/requser.js");
-const { fortniteRequests } = require("../utils/gamedata.js");
+const { fetchGameData } = require("../utils/fetchgamedata.js");
 var statsDisplay = document.getElementById("statsDisplay");
 var nameDisplay = document.getElementsByClassName("stats-container")[0].firstElementChild;
 let sameEvent = false;
@@ -43,7 +43,7 @@ function populateStatsBlock(element, username, rightOffset) {
     statsDisplay.style.display = "inline-block";
     nameDisplay.textContent = username;
     var gameStats = getStatsElement("fortnite");
-    fortniteRequests(username, gameStats);
+    fetchGameData(username, gameStats);
     sameEvent = true;
 }
 

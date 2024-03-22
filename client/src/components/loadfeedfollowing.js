@@ -6,6 +6,10 @@ function loadFeedFollowing() {
     const formData = new FormData();
     const chunkSize = 5;
     const username = reqUser();
+    //only display following if logged in
+    if (!username) {
+        return;
+    }
     formData.append('username', username);
     formData.append('chunkSize', chunkSize);
     fetch('http://localhost:3000/api/video/getchunk/following', {
@@ -18,7 +22,7 @@ function loadFeedFollowing() {
         }
         return response.json();
     }).then(async (body) => {
-        if (body) {
+        if (body.length > 0) {
             var feed = "";
             try {
                 for (var i = 0; i < body.length; i++) {
@@ -35,7 +39,7 @@ function loadFeedFollowing() {
             //cant display feed
         }
     }).catch((error) => {
-        console.error("Error: ", error);
+        //handle quietly
     });
 }
 
