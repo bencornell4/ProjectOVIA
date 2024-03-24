@@ -1,9 +1,9 @@
-const { reqUser } = require("../utils/requser.js");
+const { reqUser } = require("../utils/fetchusername.js");
 
 const uploadOpen = document.querySelectorAll('button[name="upload-open"]')
 const overlay = document.getElementById('upload-overlay');
 
-document.getElementById("uploadForm").addEventListener("submit", function(event) {
+document.getElementById("uploadForm").addEventListener("submit", async function(event) {
     event.preventDefault();
     //get spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
@@ -11,7 +11,7 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
     overlay.style.display = "none";
     //get upload data
     const formData = new FormData();
-    const username = reqUser();
+    const username = await reqUser();
     formData.append('username', username);
     const captionInput = document.getElementById("caption-input").value;
     formData.append('videoDescription', captionInput);

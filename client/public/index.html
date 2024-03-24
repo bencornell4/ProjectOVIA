@@ -20,8 +20,8 @@
                 <ul>
                     <li class="in-line"><button class="upload_button button primary" id="uploadButton" name="upload-open">Upload</button></li>
                     <li class="in-line" id="loginButton"><button class="button-alt" name="login-open">Login</button></li>
-                    <li class="in-line profile-menu" id="profileButton"><button><img src="https://res.cloudinary.com/dllfvjfoy/image/upload/f_auto,q_auto/v1/pfp/default" alt="author profile pic" class="profile-crop" name="populate-stats-hover-user"></button></li>
-                    <li class="in-line"><button class="button"><img src="imgs/3dots.jpg" id="signOut" alt="kebab" width="40" class="kebab" style="display:none"></button></li>
+                    <li class="in-line hide" id="profileButton"><button class="profile-button"><img src="https://res.cloudinary.com/dllfvjfoy/image/upload/f_auto,q_auto/v1/pfp/default" alt="author profile pic" class="profile-crop" name="populate-stats-hover-user"></button></li>
+                    <li class="in-line"><button class="button"><img src="imgs/3dots.jpg" id="signOutButton" alt="kebab" width="40" class="kebab" style="display:none"></button></li>
                 </ul>
             </nav>
         </div>
@@ -44,10 +44,10 @@
     <div id="upload-overlay" class="overlay">
         <form id="uploadForm" action="http://localhost:3000/api/upload/video" method="post" class="upload-form font primary">
             <div class="upload-container center">
-                <div>
-                    <label><span>Upload a clip:</span><input type="file" id="video-input" accept="video/*" required></label>
+                <div class="upload-form__file-div">
+                    <label><span><img src="imgs/uploadpic.png" width="100"></span><input type="file" id="video-input" accept="video/*" required></label>
                 </div>
-                <input type="text" placeholder="" id="caption-input">
+                <input type="text" placeholder="Write your caption here" id="caption-input">
                 <input class="primary button" type="submit" value="Post">
                 <button class="button-alt primary font" type="reset" id="uploadCancel">Cancel</button>
             </div>

@@ -1,4 +1,4 @@
-const { reqUser } = require("../utils/requser.js");
+const { reqUser } = require("../utils/fetchusername.js");
 const { fetchGameData } = require("../utils/fetchgamedata.js");
 var statsDisplay = document.getElementById("statsDisplay");
 var nameDisplay = document.getElementsByClassName("stats-container")[0].firstElementChild;
@@ -19,17 +19,18 @@ document.addEventListener('click', (event) => {
     }
 })
 
-document.addEventListener('mouseover', (event) => {
+document.addEventListener('mouseover', async (event) => {
     if (sameEvent) {
         return;
     }
     if (event.target.name == "populate-stats-hover-feed") { 
-        var element = getHoveredImage(event);
-        var username = element.parentElement.parentElement.nextElementSibling.firstElementChild.getElementsByTagName("h3")[0].textContent;
+        const element = getHoveredImage(event);
+        const username = element.parentElement.parentElement.nextElementSibling.firstElementChild.getElementsByTagName("h3")[0].textContent;
         populateStatsBlock(element, username, 0);
     } else if (event.target.name == "populate-stats-hover-user") {  
-        var element = getHoveredImage(event);
-        populateStatsBlock(element, reqUser(), 2.5 * element.offsetWidth);
+        const element = getHoveredImage(event);
+        const username = await reqUser();
+        populateStatsBlock(element, username, 2.5 * element.offsetWidth);
     }
 });
 

@@ -1,5 +1,5 @@
 const { getProfPage } = require("../utils/populateprofile.js");
-const { reqUser } = require("../utils/requser.js");
+const { reqUser } = require("../utils/fetchusername.js");
 const { fetchProfileData } = require('../utils/fetchprofiledata.js');
 
 const spinnerOverlay = document.getElementById('spinner-overlay');
@@ -9,7 +9,7 @@ window.addEventListener('popstate', function() {
 });
 
 //load profile page if path is correct
-window.onload = function () {
+window.onload = async function () {
     //start loading animation
     if (window.location.pathname.length > 1) {
         checkUser();
@@ -18,16 +18,17 @@ window.onload = function () {
         document.dispatchEvent(profNotLoading);
     }
     //check if a user is logged in
-    var userCheck = reqUser();
+    userCheck = await reqUser();
     if (userCheck) {
         //set prof pic
         fetchProfileData(userCheck)
-                .then((data) => {
-                    document.getElementById("profileButton").firstChild.firstChild.src = data.profPic;
-                });
+            .then((data) => {
+                document.getElementById("profileButton").firstChild.firstChild.src = data.profPic;
+            });
         //show restricted buttons
         document.getElementById("loginButton").style.display = "none";
         document.getElementById("profileButton").style.display = "inline-block";
+        document.getElementById("signOutButton").style.display = "inline-block";
         document.getElementById("uploadButton").style.display = "inline-block";
     }
 }

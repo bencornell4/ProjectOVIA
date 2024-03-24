@@ -23,6 +23,7 @@ background-color: black;
 .accent2 {color: #08C8BB;}
 .accent1 {color: #c80815;}
 .accent-split {text-shadow: 0.05rem 0.05rem #08C8BB;}
+.hide {display: none;}
 
 header {
     margin: 0rem 2rem 0;
@@ -97,11 +98,7 @@ header {
     color: #a8a8a8;
 }
 
-.profile-menu {
-    display: none;
-}
-
-.profile-menu button {
+.profile-button {
     all: unset;
     cursor: pointer;
 }
@@ -217,6 +214,11 @@ hr.solid-alt {
     line-height: 2.5;
 }
 
+.upload-form__file-div {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
 .upload-container button [type=file] {
     display:none;
 }
@@ -269,10 +271,6 @@ main {
 .post {
     display: inline-block;
     vertical-align: top;
-}
-
-.post button {
-    all: unset;
 }
 
 .content {

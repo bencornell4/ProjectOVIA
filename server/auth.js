@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const { getClient } = require('./getclient');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('./middleware/verifyjwt');
 require('dotenv').config();
 
 const registerUser = async (username, password) => {
@@ -98,9 +99,14 @@ router.post('/login', async(req, res) => {
     }
 });
 
-router.post('/logout', (req, res) => {
-    res.clearCookie('jwt');
-    res.json({ message: 'Logged out successfully'});
+router.post('/signout', verifyToken, (req, res) => {
+    try {
+        res.clearCookie('user-auth-token');
+        res.json({ message: 'Logged out successfully'});
+    } catch (err) {
+        console.error(err.message);
+        res.status(err.code).send(err);
+    }
 });
 
 module.exports = router;

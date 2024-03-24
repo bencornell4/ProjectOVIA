@@ -1,10 +1,11 @@
 const { fetchProfileKey } = require("../utils/fetchprofiledata.js");
-const { reqUser } = require("../utils/requser.js");
+const { reqUser } = require("../utils/fetchusername.js");
 
 //when page is fully loaded, load edit buttons if user is logged in
-document.addEventListener('profPageOnloadComplete', (event) => {
+document.addEventListener('profPageOnloadComplete', async (event) => {
     const elements = Array.from(document.getElementsByClassName('prof-edit-button'));
-    if(reqUser() === document.getElementById('profPageUsername').textContent) {
+    username = await reqUser();
+    if(username === document.getElementById('profPageUsername').textContent) {
         elements.forEach((element) => {
             element.style.display = "block";
         })

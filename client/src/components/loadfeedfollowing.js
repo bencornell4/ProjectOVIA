@@ -1,11 +1,11 @@
 const postTemplate = require('../handlebars/mainfeed__post.handlebars');
 const { fetchProfileData } = require('../utils/fetchprofiledata');
-const { reqUser } = require('../utils/requser');
+const { reqUser } = require('../utils/fetchusername.js');
 
-function loadFeedFollowing() {
+async function loadFeedFollowing() {
     const formData = new FormData();
     const chunkSize = 5;
-    const username = reqUser();
+    const username = await reqUser();
     //only display following if logged in
     if (!username) {
         return;
