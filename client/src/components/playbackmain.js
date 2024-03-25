@@ -1,7 +1,17 @@
+const { loadFeedMain } = require('./loadfeedmain.js');
+
+//keep track of existing observers
+const existingObservers = new Map();
+
 //get all clips
 async function loadVideos() {
     let clips = document.querySelectorAll("video");
-    clips.forEach(async function(clip) {
+
+    // Remove existing observers and listeners
+    existingObservers.forEach((observer) => observer.disconnect());
+    existingObservers.clear();
+
+    for (const [index, clip] of clips.entries()) {
         try {
             await clip.play();
         } catch (error) {
@@ -9,9 +19,17 @@ async function loadVideos() {
         }
         //if clip is 80% in frame play, else pause
         const observer = new IntersectionObserver(
-            entries => {
+            async entries => {
                 const entry = entries[0];
                 if (entry.isIntersecting) {
+                    if (index == (clips.length - 1)) {
+                        //load 5 more chunks
+                        const spinnerOverlay = document.getElementById('spinner-overlay');
+                        spinnerOverlay.style.display = 'flex';
+                        //get upload date
+                        await loadFeedMain(clip.dataset.videoId);
+                        spinnerOverlay.style.display = 'none';
+                    }
                     clip.play();
                 } else {
                     clip.pause();
@@ -21,6 +39,8 @@ async function loadVideos() {
             { threshold: 1, rootMargin: "-50px" }
         );
         observer.observe(clip);
+        //add to existing observers set
+        existingObservers.set(clip, observer);
         //click video to mute
         clip.addEventListener("click", () => {
             for (let i = 0; i < clips.length; i++)
@@ -28,7 +48,7 @@ async function loadVideos() {
                 clips[i].muted = !clips[i].muted;
             }
         });
-    });
+    }
 }
 
 document.addEventListener("updateVideosMain", loadVideos);

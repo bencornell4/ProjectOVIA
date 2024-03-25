@@ -304,8 +304,8 @@ main {
     margin-bottom: 4rem;
 }
 
-#feedError {
-    padding: 5rem;
+.feed-error {
+    margin-bottom: 20rem;
 }
 
 /* PROFILE TEMPLATE */

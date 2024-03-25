@@ -28,7 +28,10 @@ async function loadFeedFollowing() {
                 for (var i = 0; i < body.length; i++) {
                     feed = feed + await constructPost(body[i]);
                 }
-                document.getElementById("postContainerFollowing").innerHTML = feed;
+                //hide empty feed notification
+                document.getElementById("feedErrorMain").style.display = "none";
+                //update html
+                document.getElementById("postContainerFollowing").innerHTML += feed;
                 updateVideosMain = new CustomEvent("updateVideosMain");
                 document.dispatchEvent(updateVideosMain);
             } catch {

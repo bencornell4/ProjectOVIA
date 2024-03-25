@@ -1,5 +1,5 @@
-const mainFeed = document.getElementById("postContainer");
-const followingFeed = document.getElementById("postContainerFollowing");
+const mainFeed = document.getElementById("mainFeedContainer");
+const followingFeed = document.getElementById("followingFeedContainer");
 
 document.getElementById("followFeedButton").addEventListener('click', function() {
     followingFeed.style.display = 'block';

@@ -4,10 +4,6 @@ var statsDisplay = document.getElementById("statsDisplay");
 var nameDisplay = document.getElementsByClassName("stats-container")[0].firstElementChild;
 let sameEvent = false;
 
-function getHoveredImage(e) {
-    return document.elementFromPoint(e.clientX, e.clientY);
-}
-
 function getStatsElement(gameName) {
     return document.getElementById(`${gameName}Stats`);
 }
@@ -23,14 +19,12 @@ document.addEventListener('mouseover', async (event) => {
     if (sameEvent) {
         return;
     }
-    if (event.target.name == "populate-stats-hover-feed") { 
-        const element = getHoveredImage(event);
-        const username = element.parentElement.parentElement.nextElementSibling.firstElementChild.getElementsByTagName("h3")[0].textContent;
-        populateStatsBlock(element, username, 0);
-    } else if (event.target.name == "populate-stats-hover-user") {  
-        const element = getHoveredImage(event);
+    if (event.target.name == "populate-stats-hover-feed") {
+        const username = event.target.parentElement.parentElement.nextElementSibling.firstElementChild.getElementsByTagName("h3")[0].textContent;
+        populateStatsBlock(event.target, username, 0);
+    } else if (event.target.name == "populate-stats-hover-user") {
         const username = await reqUser();
-        populateStatsBlock(element, username, 2.5 * element.offsetWidth);
+        populateStatsBlock(event.target, username, 2.5 * event.target.offsetWidth);
     }
 });
 

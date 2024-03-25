@@ -15,11 +15,12 @@ function completeLoad() {
 
 document.addEventListener("profNotLoading", completeLoad);
 
-function loadFeedMain() {
+async function loadFeedMain(lastUploadDate) {
     const formData = new FormData();
     const chunkSize = 5;
     formData.append('chunkSize', chunkSize);
-    fetch('http://localhost:3000/api/video/getchunk/main', {
+    formData.append('lastUploadDate', lastUploadDate);
+    return fetch('http://localhost:3000/api/video/getchunk/main', {
         method: 'POST',
         body: new URLSearchParams(formData)
     }).then((response) => {
@@ -34,8 +35,10 @@ function loadFeedMain() {
                 for (var i = 0; i < body.length; i++) {
                     feed = feed + await constructPost(body[i]);
                 }
+                //hide empty feed notification
+                document.getElementById("feedErrorMain").style.display = "none";
                 //update html
-                document.getElementById("postContainer").innerHTML = feed;
+                document.getElementById("postContainer").innerHTML += feed;
                 updateVideosMain = new CustomEvent("updateVideosMain");
                 document.dispatchEvent(updateVideosMain);
                 //alert sufficient loading
@@ -49,14 +52,15 @@ function loadFeedMain() {
             //alert sufficient loading
             loadingSufficient = true;
             completeLoad();
-            //cant display feed
+            //no more feed message
+            document.getElementById("feedErrorMain").style.display = "block";
         }
     }).catch((error) => {
         console.error("Error: ", error);
     });
 }
 
-document.addEventListener("DOMContentLoaded", loadFeedMain);
+document.addEventListener("DOMContentLoaded", loadFeedMain(Infinity));
 
 async function constructPost(videoObject) {
     const postData = {
@@ -70,3 +74,5 @@ async function constructPost(videoObject) {
     const post = postTemplate(postData);
     return post;
 }
+
+module.exports = { loadFeedMain };
