@@ -53,6 +53,7 @@ header {
 .navbar{
     margin: 0;
     float: right;
+    margin-right: 1rem;
 }
 
 .navbar a {
@@ -136,7 +137,7 @@ hr.solid-alt {
     display: none;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 4;
     width: 100%;
     height: 100%;
     justify-content: center;
@@ -153,7 +154,6 @@ hr.solid-alt {
 #spinner {
     display: block;
     margin: auto;
-    margin-top: 50%;
     z-index: 20;
     border: 2rem solid #f3f3f3; /* Light gray border */
     border-top: 2rem solid #08C8BB; /* Blue border on top */
@@ -178,7 +178,7 @@ hr.solid-alt {
     max-width: 90%;
     max-height: 50%;
     margin: auto;
-    margin-top: 0rem;
+    margin-top: 0;
     border-radius: 2rem;
 }
 
@@ -299,6 +299,7 @@ main {
     justify-content: left;
     align-items: top;
     white-space: nowrap;
+    z-index: 2;
 }
 
 .post-container-overlay {
@@ -306,6 +307,7 @@ main {
 }
 
 .post img {
+    padding: 1rem;
     width: 4rem;
     height: 4rem;
 }
@@ -320,6 +322,7 @@ main {
     font-size: 1.3rem;
     line-height: 2.4rem;
     margin-top: 0;
+    cursor: pointer;
 }
 
 .description p {
@@ -333,6 +336,7 @@ main {
     width: 30rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .post-container video {
@@ -350,15 +354,16 @@ main {
 
 .prof-header {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     margin-top: 5rem;
 }
 
 .prof-header--pfp {
     position: relative;
-    width: 11.2rem;
-    height: 11.2rem;
+    width: 8.2rem;
+    height: 8.2rem;
+    margin-top: 2rem;
 }
 
 .prof-header--pfp img {
@@ -370,8 +375,8 @@ main {
     position: absolute;
     top: -0.5rem;
     right: -0.5rem;
-    width: 2.7rem;
-    height: 1.7rem;
+    width: 2.4rem;
+    height: 1.4rem;
     border: none;
     background-color: transparent;
 }
@@ -400,7 +405,7 @@ main {
 
 .prof-bio--description {
     position: relative;
-    width: 31.2rem;
+    width: 28.6rem;
     height: 100%;
 }
 
@@ -420,9 +425,7 @@ main {
 }
 
 .prof-feed {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 
 .video-grid {
@@ -436,21 +439,13 @@ main {
 
 .video-grid__item {
     position: relative;
-    overflow: hidden;
-    padding-bottom: 100%;
 }
 
 .video-grid__item video {
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
-.video-grid .prof-edit button {
-    top: 0.5rem;
-    right: 0.5rem;
+.video-grid__item .prof-edit button {
+    top: 5%;
+    right: 0;
 }
-

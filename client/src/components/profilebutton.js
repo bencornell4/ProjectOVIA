@@ -9,7 +9,7 @@ document.addEventListener("click", async (event) => {
         history.pushState({}, '', `/${username}`);
         location.reload();
     }
-    if (event.target.name == "populate-stats-hover-feed") {
+    if (event.target.dataset.name == "populate-stats-hover-feed") {
         //get username from post data
         username = event.target.parentNode.parentNode.parentNode.children[1].children[0].children[0].textContent;
         //open profile page

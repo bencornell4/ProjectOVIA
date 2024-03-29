@@ -35,15 +35,16 @@ const uploadVideo = async (username, videoDescription, videoFile) => {
 
 const uploadCloudinary = async (assetFile, assetKey, assetType)  => {
     try {
+        /* if video transformation: [
+            { aspect_ratio: "9:16"},
+            { width: 960 },
+            { duration: "30"}
+        ],*/
         return new Promise ((resolve, reject) => {
             cloudinary.uploader.upload_stream({ 
                 resource_type: assetType, 
-                public_id: assetKey, 
-                transformation: [
-                    { aspect_ratio: "9:16"},
-                    { width: 960 },
-                    { duration: "30"}
-                ],
+                public_id: assetKey,
+                invalidate: true,
             }, (error, result) => {
                 if (result) {
                     console.log('(Cloudinary) Upload success');
