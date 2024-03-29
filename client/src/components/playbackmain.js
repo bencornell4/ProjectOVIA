@@ -15,7 +15,6 @@ async function loadVideos() {
     // Remove existing observers and listeners
     existingObservers.forEach((observer) => observer.disconnect());
     existingObservers.clear();
-
     for (const [index, clip] of clips.entries()) {
         try {
             await clip.play();
@@ -39,8 +38,8 @@ async function loadVideos() {
                         activeVideo.pause();
                         oldVideo = activeVideo;
                     }
-                    clip.play();
                     activeVideo = clip;
+                    clip.play();
                 } else {
                     clip.pause();
                     clip.currentTime = 0;
@@ -52,7 +51,7 @@ async function loadVideos() {
                     }
                 }
             },
-            { root: null, rootMargin:"0px", threshold: 1}
+            { root: null, rootMargin:"0px", threshold: 0.9}
         );
         observer.observe(clip);
         //add to existing observers set

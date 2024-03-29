@@ -12,7 +12,7 @@ background-color: black;
 /* typography */
 .font {
     font-family: Roboto, Arial, Tahoma, sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     line-height: 1.5;
 }
 .primary {color: white;}
@@ -37,8 +37,8 @@ header {
 .profile-crop {
     border-radius: 50%;
     margin-top: 0;
-    width: 5.6rem; 
-    height: 5.6rem; 
+    width: 4.5rem; 
+    height: 4.5rem; 
     object-fit: cover;
     vertical-align: middle;
 }
@@ -109,10 +109,12 @@ header {
 
 .kebab {
     vertical-align: middle;
+    width: 3rem;
 }
 
 .button-signout {
-    margin-left: -1.5rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
 }
 
 .upload_button {
@@ -283,8 +285,8 @@ main {
     width: max-content;
     max-width: 100%;
     margin: auto;
-    margin-top: 4rem;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
 }
 
 .post-container video {
@@ -293,8 +295,8 @@ main {
 
 .post-container--info {
     position: absolute;
-    margin-top: 0rem;
-    margin-left: 0rem;
+    margin-top: -5rem;
+    margin-left: -1rem;
     display: flex;
     justify-content: left;
     align-items: top;
@@ -304,10 +306,11 @@ main {
 
 .post-container-overlay {
     display: flex;
+    padding: 2rem;
+    padding-right: 0;
 }
 
 .post img {
-    padding: 1rem;
     width: 4rem;
     height: 4rem;
 }
@@ -333,7 +336,7 @@ main {
     margin-top: -1.5rem;
     margin-bottom: 0.5rem;
     white-space: nowrap;
-    width: 30rem;
+    max-width: 30rem;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
@@ -342,6 +345,7 @@ main {
 .post-container video {
     width: 100%;
     max-width: 500px;
+    mask: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
 }
 
 .feed-error {
