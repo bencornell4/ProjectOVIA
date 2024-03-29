@@ -18,24 +18,23 @@
             <h1 class="logo accent-split">Ovia</h1>
             <nav class="navbar">
                 <ul>
-                    <li class="in-line"><button class="upload_button button primary" id="uploadButton" name="upload-open">Upload</button></li>
-                    <li class="in-line" id="loginButton"><button class="button-alt" name="login-open">Login</button></li>
+                    <li class="in-line"><button class="upload_button button primary font" id="uploadButton" name="upload-open">Upload</button></li>
+                    <li class="in-line" id="loginButton"><button class="button primary font" name="login-open">Login</button></li>
                     <li class="in-line hide" id="profileButton"><button class="profile-button"><img src="https://res.cloudinary.com/dllfvjfoy/image/upload/f_auto,q_auto/v1/pfp/default" alt="author profile pic" class="profile-crop" name="populate-stats-hover-user"></button></li>
-                    <li class="in-line"><button class="button"><img src="imgs/3dots.jpg" id="signOutButton" alt="kebab" width="40" class="kebab" style="display:none"></button></li>
+                    <li class="in-line"><button class="button button-signout"><img src="imgs/3dots.jpg" id="signOutButton" alt="kebab" width="40" class="kebab" style="display:none"></button></li>
                 </ul>
             </nav>
         </div>
         <hr class="solid">
-        <div class="center primary font">
+        <div class="primary font">
             <nav class="feed-navbar">
                 <ul>
-                    <li class="in-line"><button id="allFeedButton" class="all-button button primary :active" name="All Button">All</button></li>
-                    <li class="in-line"><button id="followFeedButton" class="following-button button primary" name="Following Button">Following</button></li>
+                    <li class="in-line"><button id="allFeedButton" class="all-button button primary :active center font" name="All Button">All</button></li>
+                    <li class="in-line"><button id="followFeedButton" class="following-button button primary center font" name="Following Button">Following</button></li>
                 </ul>
             </nav>
         </div>
     </header>
-
     
     <div id="spinner-overlay" class="overlay">
         <div id="spinner"></div>
@@ -57,10 +56,11 @@
     <div id="login-overlay" class="overlay">
         <form id="loginForm" action="http://localhost:3000/api/auth/login" method="post" class="login-form font primary">
             <div class="login-container center">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="loginFormUsername">
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="loginFormPassword">
+                <h1 class="center logo accent-split">OVIA</h1>
+                <div></div>
+                <input type="text" name="username" id="loginFormUsername" placeholder="Username">
+                <div></div>
+                <input type="password" name="password" id="loginFormPassword" placeholder="Password">
                 <div class="error-message" id="loginErrorMessage">
                     <h6>Username or password incorrect</h6>
                 </div>
@@ -79,10 +79,9 @@
     <div id="signup-overlay" class="overlay">
         <form class="login-form font primary" id="signupForm" action="http://localhost:3000/api/auth/register" method="POST">
             <div class="login-container center">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="signupFormUsername">
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="signupFormPassword">
+                <h1 class="center logo accent-split">OVIA</h1>
+                <input type="text" name="username" id="signupFormUsername" placeholder="Username">
+                <input type="password" name="password" id="signupFormPassword" placeholder="Password">
                 <div class="error-message" id="signupErrorMessage">
                     <h6>Username not available</h6>
                 </div>
@@ -116,7 +115,7 @@
 
             </div>
             <div id="feedErrorMain" class="feed-error center primary font">
-                <h4>There's nothing here :(</h4>
+                <p>There's nothing here :(</p>
             </div>
         </div>
         <div id="followingFeedContainer" style="display: none">
@@ -124,7 +123,7 @@
 
             </div>
             <div id="feedErrorFollowing" class="feed-error center primary font">
-                <h4>There's nothing here :(</h4>
+                <p>There's nothing here :(</p>
             </div>
         </div>
     </main>

@@ -67,7 +67,6 @@ async function constructPost(videoObject) {
         username: videoObject.username,
         profPic: videoObject.pfp_key,
         video_id: videoObject.video_id,
-        full_name: videoObject.full_name,
         description: videoObject.description
     };
     postData.profPic = (await fetchProfileData(postData.username)).profPic;

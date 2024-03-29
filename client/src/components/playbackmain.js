@@ -2,6 +2,11 @@ const { loadFeedMain } = require('./loadfeedmain.js');
 
 //keep track of existing observers
 const existingObservers = new Map();
+var activeVideo = null;
+var oldVideo = null;
+var lastScrollTop = 0;
+var currentScroll = 0;
+var oldScroll = 0;
 
 //get all clips
 async function loadVideos() {
@@ -30,13 +35,24 @@ async function loadVideos() {
                         await loadFeedMain(clip.dataset.videoId);
                         spinnerOverlay.style.display = 'none';
                     }
+                    if (activeVideo && activeVideo !== clip) {
+                        activeVideo.pause();
+                        oldVideo = activeVideo;
+                    }
                     clip.play();
+                    activeVideo = clip;
                 } else {
                     clip.pause();
                     clip.currentTime = 0;
+                    if (clip == activeVideo) {
+                        activeVideo = null;
+                    }
+                    if (clip == oldVideo) {
+                        oldVideo = null;
+                    }
                 }
             },
-            { threshold: 1, rootMargin: "-50px" }
+            { root: null, rootMargin:"0px", threshold: 1}
         );
         observer.observe(clip);
         //add to existing observers set
@@ -50,5 +66,31 @@ async function loadVideos() {
         });
     }
 }
+
+window.addEventListener('scroll', () => {
+    //scroll switcher to make sure only one clip plays at a time
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    document.documentElement.scrollTop;
+    if (scrollTop > lastScrollTop) {
+        currentScroll = 1;
+        //scrolling down
+        if (activeVideo && oldVideo && oldScroll != currentScroll) {
+            [activeVideo, oldVideo] = [oldVideo, activeVideo];
+            activeVideo.play();
+            oldVideo.pause();
+        }
+        oldScroll = currentScroll;
+    } else {
+        currentScroll = 0;
+        //scrolling up
+        if (activeVideo && oldVideo && oldScroll != currentScroll) {
+            [activeVideo, oldVideo] = [oldVideo, activeVideo];
+            activeVideo.play();
+            oldVideo.pause();   
+        }
+        oldScroll = currentScroll;
+    }
+    lastScrollTop = scrollTop;
+})
 
 document.addEventListener("updateVideosMain", loadVideos);

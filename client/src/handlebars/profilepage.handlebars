@@ -8,20 +8,27 @@
             <div class="prof-edit">
                 <button><img src="/imgs/editicon.png" alt="Edit Button Icon" class="prof-edit-button" style="display: none"></button>
             </div>
+            <!--<button class="button-alt primary font button-follow">Follow</button>-->
         </div>
         <div class="prof-header--info">
             <div class="prof-top-buttons">
-                <h3 id="profPageUsername" class="author-name">{{username}}</h3>
-                <button class="button-alt">Follow</button>
+                <h4 id="profPageUsername" class="primary font">{{username}}</h4>
             </div>
             <div class="prof-header--info__user">
-                <h4 class="author-name" contenteditable="false">{{userFullName}}</h4>
-                <p class="description" contenteditable="false">{{userBio}}</p>
+                <p class="primary font" contenteditable="false">{{userFullName}}</p>
                 <div class="prof-edit">
                     <button><img src="/imgs/editicon.png" alt="Edit Button" class="prof-edit-button" style="display: none"></button>
                 </div>
             </div>
         </div> 
+    </div>
+    <div class="prof-bio primary font">
+        <div class="prof-bio--description">
+            <p class="description" contenteditable="false">{{userBio}}</p>
+            <div class="prof-edit">
+                <button><img src="/imgs/editicon.png" alt="Edit Button" class="prof-edit-button" style="display: none"></button>
+            </div>
+        </div>
     </div>
     <!--
         <div class="primary font prof-header--stats">
