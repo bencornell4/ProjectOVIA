@@ -5,6 +5,7 @@ const { fetchProfileData } = require('./fetchprofiledata.js');
 function getProfPage(username) {
     fetchProfileData(username)
         .then((data) => {
+            console.log(data.profPic)
             const html = profTemplate(data);
             document.body.innerHTML = html;
             //profile loaded

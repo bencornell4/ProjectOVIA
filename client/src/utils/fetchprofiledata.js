@@ -7,13 +7,18 @@ async function fetchProfileData(username) {
         }
         const data = await profileResponse.json();
         var pfpKey = data[0].pfp_key;
-        const assetKey = `pfp/${pfpKey}`;
+        var assetKey = `pfp/${pfpKey}`;
+        //if key doesn't exist supply default key
+        if(!pfpKey) {
+            assetKey = 'pfp/0';
+        }
         //check for pfp
         const assetResponse = await fetch(`http://localhost:3000/api/assets/exists/${encodeURIComponent(assetKey)}`);
         if (!assetResponse.ok) {
             throw new Error('Network response not ok');
         }
         var assetURL = await assetResponse.json();
+        //if asset doesn't exist supply default
         if (!assetURL) {
             assetURL = `https://res.cloudinary.com/dllfvjfoy/image/upload/pfp/0`;
         }
@@ -23,6 +28,7 @@ async function fetchProfileData(username) {
             userFullName: data[0].full_name,
             userBio: data[0].bio
         };
+        console.log(username, pfpKey, assetURL);
         return profileData;
     } catch (error) {
         console.error('Error getting profile data:', error);
