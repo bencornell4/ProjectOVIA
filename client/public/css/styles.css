@@ -106,20 +106,18 @@ header {
 .profile-button {
     all: unset;
     cursor: pointer;
+    margin-right: 0.5rem;
 }
 
-.kebab {
+.img-signout {
     vertical-align: middle;
-    width: 3rem;
-}
-
-.button-signout {
-    margin-left: -1rem;
-    margin-right: -1rem;
+    width: 2rem;
+    margin-right: 0.5rem;
 }
 
 .upload_button {
     display: none;
+    margin-right: 0.5rem;
 }
 
 p {
@@ -393,7 +391,7 @@ main {
 }
 
 .prof-header--info {
-    margin-left: 5rem;
+    margin-left: 1rem;
 }
 
 .prof-header--info__user {
