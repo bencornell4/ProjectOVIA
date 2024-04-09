@@ -22,11 +22,11 @@ const registerUser = async (username, password) => {
         )).rows[0];
         await client.query('COMMIT');
         console.log("new user success: " + newUser + " new profile success: " + newProfile);
-        return true;
+        return "good";
     } catch (err) {
         await client.query('ROLLBACK');
         console.error(err.message);
-        return false;
+        return "unavailable";
     } finally {
         await client.end();
     }
@@ -72,11 +72,15 @@ function createUserJWT(res, username) {
 router.post('/register', async(req, res) => {
     const { username, password } = req.body;
     try {
-        const newUserSuccess = await registerUser(username, password);
-        if (newUserSuccess) {
-            token = createUserJWT(res, username);
+        if (password.length > 7) {
+            const newUserSuccess = await registerUser(username, password);
+            if (newUserSuccess === "good") {
+                token = createUserJWT(res, username);
+            }
+            res.json(newUserSuccess);
+        } else {
+            res.json("tooshort");
         }
-        res.json(newUserSuccess);
     } catch (err) {
         console.error(err.message);
         res.status(500).send(err);

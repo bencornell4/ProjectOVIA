@@ -15,11 +15,17 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
         }
         return response.json();
     }).then((body) => {
-        if (body) {
+        if (body === "good") {
             //reload to reflect changes
             location.reload();
-        } else {
-            document.getElementById("signupErrorMessage").style.display = "block";
+        } else if (body === "unavailable") {
+            const errorMessage = document.getElementById("signupErrorMessage");
+            errorMessage.textContent = "Username unavailable"
+            errorMessage.style.display = "block";
+        } else if (body === "tooshort") {
+            const errorMessage = document.getElementById("signupErrorMessage");
+            errorMessage.textContent = "Password must be at least 8 characters"
+            errorMessage.style.display = "block";
         }
     }).catch((error) => {
         console.error("Error signing up: ", error.message);
