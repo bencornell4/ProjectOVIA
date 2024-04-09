@@ -28,7 +28,6 @@ async function fetchProfileData(username) {
             userFullName: data[0].full_name,
             userBio: data[0].bio
         };
-        console.log(username, pfpKey, assetURL);
         return profileData;
     } catch (error) {
         console.error('Error getting profile data:', error);

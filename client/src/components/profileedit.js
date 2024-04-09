@@ -18,14 +18,19 @@ document.addEventListener('click', (event) => {
         //get editable elements in an array
         const superParent = event.target.parentNode.parentNode;
         const siblings = Array.from(superParent.parentNode.children).filter(child => child !== superParent);
-        //execute function
-        //focus on first element
         //add submit functionality
         siblings.forEach((element, index) => {
             makeEditable(element, index);
+            //image behavior is handled differently
             if (element.tagName != 'IMG') {
-                element.addEventListener(('keydown'), (event) => editSubmit(siblings, index, event));
-                element.addEventListener(('blur'), (event) => editSubmit(siblings, index, event));  
+                var type = 'full_name';
+                if (event.target.classList.contains('description-edit')) {
+                    type = 'bio';
+                }
+                //submit on submit key
+                element.addEventListener(('keydown'), (event) => editSubmit(siblings, index, event, type));
+                //submit on unselected
+                element.addEventListener(('blur'), (event) => editSubmit(siblings, index, event, type));  
             }
         });
         siblings[0].focus();
@@ -43,7 +48,7 @@ function makeEditable(element) {
 }
 
 //submit edits
-function editSubmit(elements, index, event) {
+function editSubmit(elements, index, event, type) {
      if ((event.key === 'Enter' || event.type === 'blur')) {
         if (event.target.getAttribute('contenteditable') === 'true') {
             event.preventDefault();
@@ -54,10 +59,6 @@ function editSubmit(elements, index, event) {
                 getVideo(elements[index]);
             } else if (elements[index].tagName != 'VIDEO') {
                 //text behavior
-                var type = 'bio';
-                if (index == 0) {
-                    type = 'full_name';
-                }
                 updateText(type, event.target.textContent);
                 //next element
                 elements[(index+1) % elements.length].focus();

@@ -392,11 +392,16 @@ main {
 
 .prof-header--info {
     margin-left: 1rem;
+    text-overflow:ellipsis;
+}
+
+.prof-header--info .prof-edit button {
+    top: -1rem;
+    right: -3rem;
 }
 
 .prof-header--info__user {
     position: relative;
-    width: 15rem;
 }
 
 .prof-bio {
@@ -408,8 +413,13 @@ main {
 
 .prof-bio--description {
     position: relative;
-    width: 28.6rem;
     height: 100%;
+    text-overflow:ellipsis;
+}
+
+.prof-bio .prof-edit button {
+    top: -0.5rem;
+    right: -2.5rem;
 }
 
 .prof-top-buttons button {
