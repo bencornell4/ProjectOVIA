@@ -19,7 +19,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.prod.js  --mode production",
-    "start": "webpack-dev-server --config webpack.config.dev.js --mode development --open"
+    "start": "webpack-dev-server --config webpack.config.prod.js --mode production --open"
   },
   "keywords": [],
   "author": "",
