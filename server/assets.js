@@ -8,8 +8,8 @@ const getAssetSrc = async(assetKey) => {
     try {
         const assetData = await cloudinary.api.resource(assetKey);
         const d = new Date();
-        console.log('Asset exists at:', assetData.url + '?dummy' + d.getTime());
-        return assetData.url + '?dummy' + d.getTime();
+        console.log('Asset exists at:', assetData.secure_url + '?dummy' + d.getTime());
+        return assetData.secure_url + '?dummy' + d.getTime();
     } catch (err) {
         console.log('Asset not retrieved:', err.message);
         return false;
