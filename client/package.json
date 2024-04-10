@@ -4,7 +4,11 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "jwt-decode": "^4.0.0"
+    "jwt-decode": "^4.0.0",
+    "handlebars": "^4.7.8",
+    "handlebars-loader": "^1.7.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
   },
   "name": "client",
   "version": "1.0.0",
@@ -19,7 +23,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.prod.js  --mode production",
-    "start": "webpack-dev-server --config webpack.config.prod.js --mode production --open"
+    "start": "webpack-dev-server --config webpack.config.dev.js --mode development --open"
   },
   "keywords": [],
   "author": "",
