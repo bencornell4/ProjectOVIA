@@ -61,7 +61,7 @@ function createUserJWT(res, username) {
     const token = jwt.sign({username: username}, secretKey, { expiresIn: '24h' });
     //set token in cookie
     res.cookie('user-auth-token', token, {
-        httpOnly: false,
+        httpOnly: true,
         sameSite: 'none',
         maxAge: 24 * 60 * 60 * 1000,
         secure: true,

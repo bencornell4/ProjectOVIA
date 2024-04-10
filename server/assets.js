@@ -6,12 +6,12 @@ const verifyToken = require('./middleware/verifyjwt');
 
 const getAssetSrc = async(assetKey) => {
     try {
-        const assetURL = await cloudinary.url(assetKey);
+        const assetData = await cloudinary.api.resource(assetKey);
         const d = new Date();
-        console.log('Asset exists at:', assetURL + '?dummy' + d.getTime());
-        return assetURL + '?dummy' + d.getTime();
+        console.log('Asset exists at:', assetData.url + '?dummy' + d.getTime());
+        return assetData.url + '?dummy' + d.getTime();
     } catch (err) {
-        console.log('Asset not retrieved:', err);
+        console.log('Asset not retrieved:', err.message);
         return false;
     }
     
