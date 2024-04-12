@@ -20,7 +20,8 @@ async function loadFeedMain(lastUploadDate) {
     const chunkSize = 5;
     formData.append('chunkSize', chunkSize);
     formData.append('lastUploadDate', lastUploadDate);
-    return fetch('http://localhost:3000/api/video/getchunk/main', {
+    const apiUrl = BASE_URL + '/api/video/getchunk/main';
+    return fetch(apiUrl, {
         method: 'POST',
         body: new URLSearchParams(formData)
     }).then((response) => {

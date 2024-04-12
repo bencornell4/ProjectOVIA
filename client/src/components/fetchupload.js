@@ -18,7 +18,8 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
     var videoInput = document.getElementById("video-input").files[0];
     formData.append('videoFile', videoInput, videoInput.name);
     //send upload to back end
-    fetch(event.target.action, {
+    const apiUrl = BASE_URL + '/api/upload/video';
+    fetch(apiUrl, {
         method: 'POST',
         credentials: 'include',
         body: formData,

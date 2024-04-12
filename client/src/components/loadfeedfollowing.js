@@ -12,7 +12,8 @@ async function loadFeedFollowing() {
     }
     formData.append('username', username);
     formData.append('chunkSize', chunkSize);
-    fetch('http://localhost:3000/api/video/getchunk/following', {
+    const apiUrl = BASE_URL + '/api/video/getchunk/following';
+    fetch(apiUrl, {
         method: 'POST',
         credentials: 'include',
         body: new URLSearchParams(formData)

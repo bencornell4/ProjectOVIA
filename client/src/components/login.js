@@ -5,7 +5,8 @@ const overlay = document.getElementById('login-overlay');
 
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
-    fetch(event.target.action, {
+    const apiUrl = BASE_URL + '/api/auth/login';
+    fetch(apiUrl, {
         method: 'POST',
         credentials: 'include',
         body: new URLSearchParams(new FormData(event.target))

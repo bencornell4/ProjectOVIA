@@ -1,5 +1,6 @@
 document.getElementById("signOutButton").addEventListener('click', function() {
-    fetch('http://localhost:3000/api/auth/signout', {
+    const apiUrl = BASE_URL + '/api/auth/signout';
+    fetch(apiUrl, {
             method: 'POST',
             credentials: 'include',
         }).then(response => {

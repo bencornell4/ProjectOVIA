@@ -1,7 +1,8 @@
 async function fetchProfileData(username) {
     try {
         //fetch profile data
-        const profileResponse = await fetch(`http://localhost:3000/api/profiles/${username}`);
+        const apiUrlData = BASE_URL + `/api/profiles/${username}`;
+        const profileResponse = await fetch(apiUrlData);
         if (!profileResponse.ok) {
             throw new Error('Network response not ok');
         }
@@ -13,7 +14,8 @@ async function fetchProfileData(username) {
             assetKey = 'pfp/0';
         }
         //check for pfp
-        const assetResponse = await fetch(`http://localhost:3000/api/assets/exists/${encodeURIComponent(assetKey)}`);
+        const apiUrlExists = BASE_URL + `/api/assets/exists/${encodeURIComponent(assetKey)}`;
+        const assetResponse = await fetch(apiUrlExists);
         if (!assetResponse.ok) {
             throw new Error('Network response not ok');
         }
@@ -38,7 +40,8 @@ async function fetchProfileData(username) {
 async function fetchProfileKey(username) {
     try {
         //fetch profile data
-        const profileResponse = await fetch(`http://localhost:3000/api/profiles/${username}`);
+        const apiUrl = BASE_URL + `/api/profiles/${username}`;
+        const profileResponse = await fetch(apiUrl);
         if (!profileResponse.ok) {
             throw new Error('Network response not ok');
         }
