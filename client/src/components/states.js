@@ -38,8 +38,25 @@ function hideSpinner() {
     spinnerOverlay.style.display = 'none';
 }
 
+function showIntroduction() {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        const welcomeMessage = document.getElementById("welcomeMessage");
+        welcomeMessage.textContent = "We've detected you may be on a mobile device, please consider turning low power mode off.";
+    }
+    if (localStorage.getItem("hasCodeRunBefore") === null) {
+        const welcomeOverlay = document.getElementById("welcomeOverlay");
+        welcomeOverlay.style.display = 'flex';
+        const welcomeButton = document.getElementById("welcomeClose");
+        welcomeButton.addEventListener('click', () => {
+            welcomeOverlay.style.display = 'none';
+        });
+        localStorage.setItem("hasCodeRunBefore", true);
+    }
+}
+
 document.addEventListener("contentLoadedProfile", hideSpinner);
 document.addEventListener("contentLoadedMain", hideSpinner);
+document.addEventListener("contentLoadedMain", showIntroduction);
 
 //load profile page if user is valid
 function checkUser() {

@@ -146,6 +146,10 @@ hr.solid-alt {
     background: rgba(0, 0, 0, 0.5);
 }
 
+#welcomeOverlay {
+    z-index: 19;
+}
+
 #spinner-overlay {
     display: flex;
     background: #121212;
@@ -345,6 +349,7 @@ main {
     width: 100%;
     max-width: 500px;
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
+    background: #121212;
 }
 
 .feed-error {
@@ -456,6 +461,7 @@ main {
 
 .video-grid__item video {
     width: 100%;
+    background: #121212;
 }
 
 .video-grid__item .prof-edit button {
