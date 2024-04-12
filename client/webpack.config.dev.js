@@ -26,9 +26,7 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
     new webpack.DefinePlugin({
-      'BASE_URL': JSON.stringify('https://projectovia.onrender.com'), // Set the production API URL
-      //https://projectovia.onrender.com
-      //http://localhost:3000
+      'BASE_URL': JSON.stringify('http://localhost:3000'), // Set the production API URL
    }),
   ],
 };

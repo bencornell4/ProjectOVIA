@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const authRouter = require('./auth');
 const confirmUser = require('./confirmuser');
@@ -17,7 +18,7 @@ const assetsRouter = require('./assets');
 
 //middleware set up
 app.use(cors({
-    origin: "http://localhost:8080",
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
 }));
 app.use(fileUpload());
