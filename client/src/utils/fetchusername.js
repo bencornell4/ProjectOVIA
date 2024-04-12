@@ -1,5 +1,6 @@
 async function reqUser() {
-    return fetch('http://localhost:3000/api/profiles/getusername', {
+    const apiUrl = BASE_URL + '/api/profiles/getusername';
+    return fetch(apiUrl, {
             method: 'POST',
             credentials: 'include',
         }).then((response) => {

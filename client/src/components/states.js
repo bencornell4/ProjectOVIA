@@ -44,7 +44,8 @@ document.addEventListener("contentLoadedMain", hideSpinner);
 //load profile page if user is valid
 function checkUser() {
     const username = window.location.pathname.substring(1);
-    fetch(`http://localhost:3000/api/confirmuser/${username}`)
+    const apiUrl = BASE_URL + `/api/confirmuser/${username}`;
+    fetch(apiUrl)
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Network response not ok");

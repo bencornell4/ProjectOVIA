@@ -6,7 +6,8 @@ function loadFeedProfile() {
     const username = window.location.pathname.substring(1);
     formData.append('chunkSize', chunkSize);
     formData.append('username', username);
-    fetch(`http://localhost:3000/api/video/getchunk/profile`, {
+    const apiUrl = BASE_URL + '/api/video/getchunk/profile';
+    fetch(apiUrl, {
         method: 'POST',
         body: new URLSearchParams(formData)
     }).then((response) => {

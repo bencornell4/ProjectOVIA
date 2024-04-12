@@ -1,6 +1,7 @@
 function fetchGameData(username, targetText)
 {
-    fetch(`http://localhost:3000/api/stats/${username}`, {
+    const apiUrl = BASE_URL + `/api/stats/${username}`;
+    fetch(apiUrl, {
             method: 'GET',
         })
         .then(response => {

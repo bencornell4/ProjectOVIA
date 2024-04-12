@@ -73,7 +73,8 @@ function updateText(type, text) {
     formData.append('username', username);
     formData.append('type', type);
     formData.append('text', text);
-    fetch('http://localhost:3000/api/profiles/set', {
+    const apiUrl = BASE_URL + '/api/profiles/set';
+    fetch(apiUrl, {
         method: 'POST',
         credentials: 'include',
         body: formData,
@@ -99,7 +100,8 @@ function getVideo(element) {
     const assetKey = element.id;
     formData.append('assetKey', assetKey);
     formData.append('assetType', 'video');
-    fetch('http://localhost:3000/api/assets/delete', {
+    const apiUrl = BASE_URL + '/api/assets/delete';
+    fetch(apiUrl, {
         method: 'POST',
         credentials: 'include',
         body: formData,
@@ -142,8 +144,9 @@ async function updatePFP(imgInput) {
     formData.append('username', username);
     formData.append('pfpKey', pfpKey);
     formData.append('imageFile', imgInput, imgInput.name);
+    const apiUrl = BASE_URL + '/api/upload/pfp';
     //send upload to back end
-    fetch('http://localhost:3000/api/upload/pfp', {
+    fetch(apiUrl, {
         method: 'POST',
         credentials: 'include',
         body: formData,
