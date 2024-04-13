@@ -19,7 +19,7 @@ module.exports = {
   mode: 'production',
   plugins: [
     new webpack.DefinePlugin({
-      'BASE_URL': JSON.stringify('https://projectovia.onrender.com'), // Set the production API URL
+      'BASE_URL': JSON.stringify('https://server.ovia.live'), // Set the production API URL
    }),
   ],
 };
