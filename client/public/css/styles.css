@@ -4,9 +4,9 @@
 }
 
 body {
-box-sizing: border-box;
-margin: 0;
-background-color: #121212;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: #121212;
 }
 
 /* typography */
@@ -26,6 +26,7 @@ background-color: #121212;
 
 header {
     margin: 0rem 0rem 0rem 0rem;
+    overflow: hidden;
 }
 
 .container {
@@ -337,7 +338,8 @@ main {
 }
 
 .description {
-    max-width: 200px;
+    width: 60vw;
+    max-width: 300px;
 }
 
 .description p {
@@ -354,7 +356,7 @@ main {
 }
 
 .post-container video {
-    width: 100%;
+    width: 100vw;
     max-width: 500px;
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
     background: #121212;
