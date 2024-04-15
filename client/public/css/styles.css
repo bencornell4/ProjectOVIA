@@ -56,6 +56,11 @@ header {
     margin-right: 1rem;
 }
 
+.navbar ul {
+    display: inline-flex;
+    align-items: center;
+}
+
 .navbar a {
     text-decoration: none;
     color: #fff;
