@@ -3,13 +3,20 @@ const router = express.Router();
 const { getClient } = require('./getclient');
 const cloudinary = require('./cloudinaryclient');
 const verifyToken = require('./middleware/verifyjwt');
+const http = require('http');
 
 const getAssetSrc = async(assetKey) => {
     try {
-        const assetData = await cloudinary.api.resource(assetKey);
+        const assetUrl = await cloudinary.url(assetKey);
+        const responseCode = (await fetch(assetUrl, {
+            method: 'HEAD'
+        })).ok;
+        if (!responseCode) {
+            throw new Error();
+        }
         const d = new Date();
-        console.log('Asset exists at:', assetData.secure_url + '?dummy' + d.getTime());
-        return assetData.secure_url + '?dummy' + d.getTime();
+        console.log('Asset exists at:', assetUrl + '?dummy' + d.getTime());
+        return assetUrl + '?dummy' + d.getTime();
     } catch (err) {
         console.log('Asset not retrieved:', err.message);
         return false;

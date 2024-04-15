@@ -12,7 +12,7 @@ background-color: #121212;
 /* typography */
 .font {
     font-family: Roboto, Arial, Tahoma, sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     line-height: 1.5;
 }
 .primary {color: #fff;}
@@ -23,6 +23,10 @@ background-color: #121212;
 .accent1 {color: #c80815;}
 .accent-split {text-shadow: 0.05rem 0.05rem #08C8BB;}
 .hide {display: none;}
+
+@media only screen and (max-width: 500px) {
+    html { -webkit-text-size-adjust:none; }  /* should render everything * 0.8 */  
+}
 
 header {
     margin: 0rem 0rem 0rem 0rem;
@@ -51,6 +55,12 @@ header {
 }
 
 .navbar{
+    margin: 0;
+    float: right;
+    margin-right: 1rem;
+}
+
+.navbar ul{
     margin: 0;
     float: right;
     margin-right: 1rem;
@@ -325,7 +335,7 @@ main {
 .author-name {
     display: inline-block;
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     line-height: 2.4rem;
     margin-top: 0;
     cursor: pointer;
@@ -333,7 +343,7 @@ main {
 
 .description p {
     line-height: 1.9rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
     word-break: break-word;
     font-weight: 400;
     margin-top: -1.5rem;

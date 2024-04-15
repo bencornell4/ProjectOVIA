@@ -23,7 +23,9 @@ window.onload = async function () {
         //set prof pic
         fetchProfileData(userCheck)
             .then((data) => {
-                document.getElementById("profileButton").firstChild.firstChild.src = data.profPic;
+                if(document.getElementById("profileButton")) {
+                    document.getElementById("profileButton").firstChild.firstChild.src = data.profPic;
+                }
             });
         //show restricted buttons
         document.getElementById("loginButton").style.display = "none";
