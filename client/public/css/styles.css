@@ -336,6 +336,10 @@ main {
     cursor: pointer;
 }
 
+.description {
+    max-width: 200px;
+}
+
 .description p {
     line-height: 1.9rem;
     font-size: 1rem;
@@ -344,7 +348,6 @@ main {
     margin-top: -1.5rem;
     margin-bottom: 0.5rem;
     white-space: nowrap;
-    max-width: 30rem;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
