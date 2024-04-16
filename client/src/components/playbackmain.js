@@ -5,6 +5,7 @@ var activeVideo = null;
 var activeDistance = Infinity;
 var clips = null;
 var feedEmpty = false;
+var lastClip = null;
 
 //get all clips
 async function loadVideos() {
@@ -28,14 +29,13 @@ async function playVideos() {
         const videoCenter = videoRect.top + videoRect.height / 2;
         const videoDistance = Math.abs(viewportCenter - videoCenter);
         if (videoDistance < activeDistance || clip === activeVideo) {
-            if (index == (clips.length - 1) && !feedEmpty) {
+            if (index == (clips.length - 1) && clip.dataset.videoId != lastClip) {
+                //monitor last checked clip
+                lastClip = clip.dataset.videoId;
                 //load 5 more chunks
                 const spinnerOverlay = document.getElementById('spinner-overlay');
                 spinnerOverlay.style.display = 'flex';
-                //get upload date
-                feedEmpty = false;
-                const feedLoaded = await loadFeedMain(clip.dataset.videoId);
-                feedEmpty = feedLoaded;
+                await loadFeedMain(clip.dataset.videoId);
                 spinnerOverlay.style.display = 'none';
             }
             if (activeVideo) {
