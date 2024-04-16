@@ -44,6 +44,16 @@ async function loadFeedMain(lastUploadDate) {
                 (document.getElementById("postsContainer")).appendChild(feedChunk);
                 updateVideosMain = new CustomEvent("updateVideosMain");
                 document.dispatchEvent(updateVideosMain);
+                //preload videos
+                const clips = document.querySelectorAll("video");
+                await Promise.all(Array.from(clips).map(async (clip) => {
+                    try {
+                        await clip.play();
+                        clip.pause();
+                    } catch (error) {
+                        return;
+                    }
+                }));
                 //alert sufficient loading
                 loadingSufficient = true;
                 completeLoad();

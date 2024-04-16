@@ -4,18 +4,23 @@ const viewportCenter = window.scrollY + window.innerHeight / 2;
 var activeVideo = null;
 var activeDistance = Infinity;
 var clips = null;
-var feedEmpty = false;
 var lastClip = null;
 
-//get all clips
 async function loadVideos() {
     clips = document.querySelectorAll("video");
 
     clips.forEach(async (clip, index) => {
         //hide video spinners when loaded
-        clip.addEventListener("loadeddata", () => {
+        clip.addEventListener("loadeddata", async (index) => {
             const spinner = document.getElementById(`spinner${clip.dataset.videoId}`);
             spinner.style.display = "none";
+            if (index == 0) {
+                try {
+                    await clip.play();
+                } catch (error) {
+                    return;
+                }
+            } 
         });
         //click video to mute
         clip.addEventListener("click", () => {
@@ -33,8 +38,6 @@ async function playVideos() {
         const videoRect = clip.getBoundingClientRect();
         const videoCenter = videoRect.top + videoRect.height / 2;
         const videoDistance = Math.abs(viewportCenter - videoCenter);
-        //get clips loading spinner
-        const spinner = document.getElementById(`spinner${clip.dataset.videoId}`);
         if (videoDistance < activeDistance || clip === activeVideo) {
             if (index == (clips.length - 1) && clip.dataset.videoId != lastClip) {
                 //monitor last checked clip
@@ -52,10 +55,7 @@ async function playVideos() {
             activeVideo = clip;
             if (clip.paused) {
                 try {
-                    const spinner = document.getElementById(`spinner${clip.dataset.videoId}`);
-                    spinner.style.display = "block";
                     await clip.play();
-                    spinner.style.display = "none";
                 } catch (error) {
                     return;
                 }
