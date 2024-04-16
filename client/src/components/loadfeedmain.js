@@ -34,12 +34,15 @@ async function loadFeedMain(lastUploadDate) {
             var feed = "";
             try {
                 for (var i = 0; i < body.length; i++) {
-                    feed = feed + await constructPost(body[i]);
+                    feed += await constructPost(body[i]);
                 }
                 //hide empty feed notification
                 document.getElementById("feedErrorMain").style.display = "none";
                 //update html
-                document.getElementById("postContainer").innerHTML += feed;
+                const feedChunk = document.createElement("section");
+                feedChunk.innerHTML = feed;
+                console.log(feedChunk);
+                (document.getElementById("postsContainer")).appendChild(feedChunk);
                 updateVideosMain = new CustomEvent("updateVideosMain");
                 document.dispatchEvent(updateVideosMain);
                 //alert sufficient loading
