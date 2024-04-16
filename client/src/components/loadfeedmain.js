@@ -46,10 +46,12 @@ async function loadFeedMain(lastUploadDate) {
                 document.dispatchEvent(updateVideosMain);
                 //preload videos
                 const clips = document.querySelectorAll("video");
-                await Promise.all(Array.from(clips).map(async (clip) => {
+                await Promise.all(Array.from(clips).map(async (clip, index) => {
                     try {
                         await clip.play();
-                        clip.pause();
+                        if (index > 0) {
+                            clip.pause();
+                        }
                     } catch (error) {
                         return;
                     }
