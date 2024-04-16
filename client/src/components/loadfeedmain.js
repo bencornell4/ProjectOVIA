@@ -45,6 +45,7 @@ async function loadFeedMain(lastUploadDate) {
                 //alert sufficient loading
                 loadingSufficient = true;
                 completeLoad();
+                return true;
             } catch {
                 //silent error
                 return;
@@ -55,6 +56,7 @@ async function loadFeedMain(lastUploadDate) {
             completeLoad();
             //no more feed message
             document.getElementById("feedErrorMain").style.display = "block";
+            return false;
         }
     }).catch((error) => {
         console.error("Error: ", error);
