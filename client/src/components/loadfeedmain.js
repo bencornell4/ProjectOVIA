@@ -41,7 +41,6 @@ async function loadFeedMain(lastUploadDate) {
                 //update html
                 const feedChunk = document.createElement("section");
                 feedChunk.innerHTML = feed;
-                console.log(feedChunk);
                 (document.getElementById("postsContainer")).appendChild(feedChunk);
                 updateVideosMain = new CustomEvent("updateVideosMain");
                 document.dispatchEvent(updateVideosMain);
