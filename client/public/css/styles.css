@@ -35,6 +35,12 @@ header {
     align-items: center;
 }
 
+@media only screen and (min-width: 768px) {
+    .container {
+        justify-content: space-around;
+    }
+}
+
 .profile-crop {
     border-radius: 50%;
     margin-top: 0;
@@ -384,7 +390,7 @@ main {
     .post-container video {
         margin-top: 8rem;
     }
- }
+}
 
 .feed-error {
     line-height: 1.5rem;
